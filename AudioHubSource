@@ -1,3 +1,4 @@
+--yes, lua isn't my strong suit at all
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -338,7 +339,25 @@ CloseButton.TextSize = 18.000
 CloseButton.TextWrapped = true
 CloseButton.TextYAlignment = Enum.TextYAlignment.Bottom
 CloseButton.MouseButton1Click:Connect(function()
-	ScreenGui:Destroy()
+if XLabel.Text == " X" then
+MainFrame.Visible = false
+AudioHUBv1.Visible = false
+SettingsFrame.Visible = false
+CreditsLabel.Visible = false
+RFECheck.Visible = false
+XLabel.Text = " ^"
+elseif XLabel.Text == " ^" then
+MainFrame.Visible = true
+AudioHUBv1.Visible = true
+SettingsFrame.Visible = true
+CreditsLabel.Visible = true
+RFECheck.Visible = true
+XLabel.Text = " X"
+end
+end)
+
+CloseButton.MouseButton2Click:Connect(function()
+    ScreenGui:Destroy()
 end)
 
 XLabel.Name = "XLabel"
@@ -844,7 +863,7 @@ RFECheck.TextWrapped = true
 
 if game.SoundService.RespectFilteringEnabled == true then
 	RFECheck.Text = "RespectFilteringEnabled: true"
-else
+elseif game.SoundService.RespectFilteringEnabled == false then
 	RFECheck.Text = "RespectFilteringEnabled: false"
 end
 
