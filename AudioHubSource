@@ -1,3 +1,4 @@
+-- had to fix the log feature
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -720,18 +721,16 @@ LogButton_2.MouseButton1Click:Connect(function()
 			end
 		end
 	elseif game.PlaceId ~= 177052655 then
-	local asd = GetPlayer(InputNameBox.Text)
+		local asd = GetPlayer(InputNameBox.Text)
 		if asd then
-		for i,v in pairs(game.Workspace[_player.p.Name]:GetDescendants()) do
-			if v:IsA'Sound' then
-				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-				    a.Text = v.SoundId
-				    setclipboard(a.Text, "%d+")
+			for i,v in pairs(asd:GetDescendants()) do
+				if v:IsA'Sound' then
+					a.Text = v.SoundId
+					setclipboard(tostring(a.Text))
 				end
 			end
 		end
 	end
-end
 end)
 
 Info.Name = "Info"
