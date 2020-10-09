@@ -1,4 +1,4 @@
---yes, lua isn't my strong suit at all
+--did i mention how cool turtles are
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -345,12 +345,22 @@ AudioHUBv1.Visible = false
 SettingsFrame.Visible = false
 CreditsLabel.Visible = false
 RFECheck.Visible = false
+LogFrame.Visible = false
+BackpackFrame.Visible = false
+MuteFrame.Visible = false
+LogFrame.Visible = false
+TimeFrame.Visible = false
 XLabel.Text = " ^"
 elseif XLabel.Text == " ^" then
 MainFrame.Visible = true
 AudioHUBv1.Visible = true
 SettingsFrame.Visible = true
 CreditsLabel.Visible = true
+LogFrame.Visible = true
+BackpackFrame.Visible = true
+MuteFrame.Visible = true
+LogFrame.Visible = true
+TimeFrame.Visible = true
 RFECheck.Visible = true
 XLabel.Text = " X"
 end
