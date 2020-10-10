@@ -936,6 +936,18 @@ UnDupe.MouseButton1Click:Connect(function()
 Dupe.Visible = true
 UnDupe.Visible = false
 dupe = false
+for i,v in pairs(workspace:GetChildren()) do
+		if (v:IsA"Tool" and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "BoomboxGearThree" or v.Name == "Radio") then
+			if v:FindFirstChild("Handle") then
+				repeat
+					wait()
+					if _player.c() then
+				v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+			end
+		until v.Parent == _player.c()
+     end
+end
+end
 end)
 
 Info_2.Name = "Info"
@@ -1045,5 +1057,17 @@ rs.Stepped:Connect(function()
 				tool.Handle.CFrame = CFrame.new(pos) --takes the tools position and replaces it with yours
 			end
 		end
-	end
+		for i,v in pairs(workspace:GetChildren()) do
+		if (v:IsA"Tool" and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "BoomboxGearThree" or v.Name == "Radio") then
+			if v:FindFirstChild("Handle") then
+				repeat
+					wait(.5)
+					if _player.c() then
+				v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+			end
+		until v.Parent == _player.c()
+            end
+        end
+    end
+end
 end)
