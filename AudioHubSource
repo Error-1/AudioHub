@@ -826,33 +826,29 @@ PlayButton2.TextSize = 25.000
 PlayButton2.TextWrapped = true
 PlayButton2.MouseButton1Click:Connect(function()
 	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
-		if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio" then
-			v.Parent = game.Players.LocalPlayer.Character
-		end
-	end
-	
-	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
-		if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
-			v.Parent = _player.c()
-			local tool = _player.c():FindFirstChildOfClass("Tool")
-			if tool then
-				tool:FindFirstChildOfClass("RemoteEvent"):FireServer("PlaySong",encrypt(AudBox.Text))
-			end
-		end
-	end
-	
-	wait(0.6)
-	
-	game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
-	
-	wait(0.6)
-	
-	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
-		if v:IsA'Tool' and v.Name == "BoomBox" or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio" then
-			v.Handle.Sound.TimePosition = TimePosition.Text
-			v.Handle.Sound.Playing = true
-		end
-	end
+        if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+            v.Parent = game.Players.LocalPlayer.Character
+        end
+    end
+    
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
+        if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+            v:FindFirstChildOfClass'RemoteEvent':FireServer("PlaySong",encrypt(AudBox.Text))
+        end
+    end
+    
+    wait(0.6)
+    
+    game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
+    
+    wait(0.6)
+    
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if v:IsA'Tool' and v.Name == "BoomBox" or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+            v.Handle.Sound.TimePosition = TimePosition.Text
+            v.Handle.Sound.Playing = true
+        end
+    end
 end)
 
 AudioHUBv1.Name = "AudioHUB v1"
