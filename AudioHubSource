@@ -1,4 +1,4 @@
--- log feature fixed possibly?
+-- ok the log feature is definitely fixed.
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -28,7 +28,7 @@ local PlayerName = Instance.new("TextBox")
 local Set = Instance.new("TextButton")
 local TimePosition = Instance.new("TextBox")
 local LogFrame = Instance.new("Frame")
-local InputNameBox_2 = Instance.new("TextBox")
+local InputName = Instance.new("TextBox")
 local LogButton_2 = Instance.new("TextButton")
 local Info = Instance.new("TextLabel")
 local AudioHUBv1 = Instance.new("TextLabel")
@@ -700,20 +700,20 @@ LogFrame.Position = UDim2.new(0.310000002, 0, 1, 0)
 LogFrame.Size = UDim2.new(0, 344, 0, 235)
 LogFrame.Visible = false
 
-InputNameBox_2.Name = "InputNameBox"
-InputNameBox_2.Parent = LogFrame
-InputNameBox_2.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-InputNameBox_2.BackgroundTransparency = 0.300
-InputNameBox_2.BorderSizePixel = 0
-InputNameBox_2.Position = UDim2.new(-0.00781995151, 0, 0.148936167, 0)
-InputNameBox_2.Size = UDim2.new(0, 347, 0, 60)
-InputNameBox_2.Font = Enum.Font.GothamBold
-InputNameBox_2.PlaceholderColor3 = Color3.fromRGB(255, 170, 0)
-InputNameBox_2.PlaceholderText = "Input Username"
-InputNameBox_2.Text = ""
-InputNameBox_2.TextColor3 = Color3.fromRGB(255, 170, 0)
-InputNameBox_2.TextSize = 35.000
-InputNameBox_2.TextWrapped = true
+InputName.Name = "InputName"
+InputName.Parent = LogFrame
+InputName.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+InputName.BackgroundTransparency = 0.300
+InputName.BorderSizePixel = 0
+InputName.Position = UDim2.new(-0.00781995151, 0, 0.148936167, 0)
+InputName.Size = UDim2.new(0, 347, 0, 60)
+InputName.Font = Enum.Font.GothamBold
+InputName.PlaceholderColor3 = Color3.fromRGB(255, 170, 0)
+InputName.PlaceholderText = "Input Username"
+InputName.Text = ""
+InputName.TextColor3 = Color3.fromRGB(255, 170, 0)
+InputName.TextSize = 35.000
+InputName.TextWrapped = true
 
 LogButton_2.Name = "LogButton"
 LogButton_2.Parent = LogFrame
@@ -726,27 +726,17 @@ LogButton_2.TextColor3 = Color3.fromRGB(135, 90, 0)
 LogButton_2.TextSize = 25.000
 LogButton_2.TextWrapped = true
 LogButton_2.MouseButton1Click:Connect(function()
-	if game.PlaceId == 177052655 then
-		local asd = GetPlayer(InputNameBox.Text)
-		if asd then
-			for i,v in pairs(asd:GetDescendants()) do
+local player = GetPlayer(InputName.Text)
+	if player then
+		local c = player.Character
+		if c then
+			for i,v in pairs(c:GetDescendants()) do
 				if v:IsA'Sound' then
-					a.Text = v.SoundId
-					setclipboard(tostring(a.Text))
+					setclipboard(v.SoundId)
 				end
 			end
-		end
-	elseif game.PlaceId ~= 177052655 then
-		local asd = GetPlayer(InputNameBox.Text)
-		if asd then
-			for i,v in pairs(asd:GetDescendants()) do
-				if v:IsA'Sound' then
-					a.Text = v.SoundId
-					setclipboard(tostring(a.Text))
-				end
-			end
-		end
-	end
+	    end
+     end
 end)
 
 Info.Name = "Info"
