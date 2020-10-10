@@ -1055,7 +1055,7 @@ rs.Stepped:Connect(function()
 				tool.Parent = game.Players.LocalPlayer.Character
 			end
 		end
-		for i,tool in pairs(workspace:GetDescendants()) do
+		for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
 			if tool:IsA'Tool' then
 			    tool.Handle.CFrame = CFrame.new(0,5000,0)
 				tool.Parent = workspace
