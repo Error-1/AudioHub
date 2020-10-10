@@ -907,7 +907,14 @@ rs.Stepped:Connect(function() --antimute
 				end
 			end
 		end
-	end
+	for i,v in pairs(game.Players.Backpack:GetDescendants()) do
+              if v:IsA'Sound' then
+                if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+                v.Playing = true
+            end
+        end
+    end
+end
 end)
 
 rs.Stepped:Connect(function() --player mute
@@ -915,6 +922,16 @@ rs.Stepped:Connect(function() --player mute
 		local player = GetPlayer(InputNameBox.Text) --add the text box here
 		if player then
             for i,v in pairs(player:GetDescendants()) do
+                if v:IsA'Sound' and v.Name ~= _player.p.Name then
+                    local c = player.Character
+                    for i,audio in next, c:GetDescendants() do
+                        if audio:IsA("Sound") then
+                            audio.Playing = false
+                        end
+                    end
+                end
+            end
+            for i,v in pairs(player.Backpack:GetDescendants()) do
                 if v:IsA'Sound' and v.Name ~= _player.p.Name then
                     local c = player.Character
                     for i,audio in next, c:GetDescendants() do
