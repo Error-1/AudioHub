@@ -668,6 +668,11 @@ Set.MouseButton1Click:Connect(function()
 					v.TimePosition = TimePosition.Text
 				end
 			end
+			for i,v in pairs(player.Backpack:GetDescendants()) do
+			    if v:IsA'Sound' then
+			        v.TimePosition = TimePosition.Text
+			    end
+		    end
 		end
 	end
 end)
@@ -1045,7 +1050,7 @@ rs.Stepped:Connect(function()
 	if dupe then
 		workspace[_player.p.Name].Humanoid.Health = 0
 		local pos = workspace[_player.p.Name].HumanoidRootPart.Position -- grabs your position
-		workspace.Marleyify.HumanoidRootPart.CFrame = CFrame.new(0,5000,0)
+		workspace[_player.p.Name].HumanoidRootPart.CFrame = CFrame.new(0,5000,0)
 		for i,tool in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
 			if tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "Radio" or tool.Name == "SuperFlyGoldBoombox" then
 				tool.Parent = game.Players.LocalPlayer.Character
@@ -1053,8 +1058,9 @@ rs.Stepped:Connect(function()
 		end
 		for i,tool in pairs(workspace:GetDescendants()) do
 			if tool:IsA'Tool' then
+			    tool.Handle.CFrame = CFrame.new(0,5000,0)
 				tool.Parent = workspace
-				tool.Handle.CFrame = CFrame.new(pos) --takes the tools position and replaces it with yours
+				tool.Handle.CFrame = CFrame.new(pos)--takes the tools position and replaces it with yours
 			end
 		end
 		for i,v in pairs(workspace:GetChildren()) do
