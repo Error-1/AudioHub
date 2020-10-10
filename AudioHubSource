@@ -1,5 +1,4 @@
 -- log feature is just broken and i cant fix it ok so cry about it
--- i added a feature to mute people using bplay, and you can't mute yourself anymore btw
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -41,6 +40,11 @@ local AudBox = Instance.new("TextBox")
 local PlayButton2 = Instance.new("TextButton")
 local BackpackButton = Instance.new("TextButton")
 local RFECheck = Instance.new("TextLabel")
+local DupeFrame = Instance.new("Frame")
+local DupeButton = Instance.new("TextButton")
+local Info_2 = Instance.new("TextLabel")
+local Dupe = Instance.new("TextButton")
+local UnDupe = Instance.new("TextButton")
 --loops
 servermute = false
 antimute = false
@@ -299,8 +303,8 @@ PlayButton.TextColor3 = Color3.fromRGB(135, 90, 0)
 PlayButton.TextSize = 25.000
 PlayButton.TextWrapped = true
 PlayButton.MouseButton1Click:Connect(function()
-if game.PlaceId == 455366377 or game.PlaceId == 4669040 then
-    	for i,v in pairs(_player.b():GetChildren()) do
+	if game.PlaceId == 455366377 or game.PlaceId == 4669040 then
+		for i,v in pairs(_player.b():GetChildren()) do
 			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
 				v.Parent = _player.c()
 				local tool = _player.c():FindFirstChildOfClass("Tool")
@@ -340,35 +344,37 @@ CloseButton.TextSize = 18.000
 CloseButton.TextWrapped = true
 CloseButton.TextYAlignment = Enum.TextYAlignment.Bottom
 CloseButton.MouseButton1Click:Connect(function()
-if XLabel.Text == " X" then
-MainFrame.Visible = false
-AudioHUBv1.Visible = false
-SettingsFrame.Visible = false
-CreditsLabel.Visible = false
-RFECheck.Visible = false
-LogFrame.Visible = false
-BackpackFrame.Visible = false
-MuteFrame.Visible = false
-LogFrame.Visible = false
-TimeFrame.Visible = false
-XLabel.Text = " ^"
-elseif XLabel.Text == " ^" then
-MainFrame.Visible = true
-AudioHUBv1.Visible = true
-SettingsFrame.Visible = true
-CreditsLabel.Visible = true
-LogFrame.Visible = true
-BackpackFrame.Visible = true
-MuteFrame.Visible = true
-LogFrame.Visible = true
-TimeFrame.Visible = true
-RFECheck.Visible = true
-XLabel.Text = " X"
-end
+	if XLabel.Text == " X" then
+		MainFrame.Visible = false
+		AudioHUBv1.Visible = false
+		SettingsFrame.Visible = false
+		CreditsLabel.Visible = false
+		RFECheck.Visible = false
+		LogFrame.Visible = false
+		BackpackFrame.Visible = false
+		MuteFrame.Visible = false
+		LogFrame.Visible = false
+		TimeFrame.Visible = false
+		DupeFrame.Visible = false
+		XLabel.Text = " ^"
+	elseif XLabel.Text == " ^" then
+		MainFrame.Visible = true
+		AudioHUBv1.Visible = true
+		SettingsFrame.Visible = true
+		CreditsLabel.Visible = true
+		LogFrame.Visible = true
+		BackpackFrame.Visible = true
+		MuteFrame.Visible = true
+		LogFrame.Visible = true
+		TimeFrame.Visible = true
+		RFECheck.Visible = true
+		DupeFrame.Visible = true
+		XLabel.Text = " X"
+	end
 end)
 
 CloseButton.MouseButton2Click:Connect(function()
-    ScreenGui:Destroy()
+	ScreenGui:Destroy()
 end)
 
 XLabel.Name = "XLabel"
@@ -412,6 +418,7 @@ MainButton.MouseButton1Click:Connect(function()
 	MuteFrame.Visible = false
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
+	DupeFrame.Visible = false
 end)
 
 MuteButton.Name = "MuteButton"
@@ -430,6 +437,7 @@ MuteButton.MouseButton1Click:Connect(function()
 	MuteFrame.Visible = true
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
+	DupeFrame.Visible = false
 end)
 
 TimePosButton.Name = "TimePosButton"
@@ -448,6 +456,7 @@ TimePosButton.MouseButton1Click:Connect(function()
 	MuteFrame.Visible = false
 	TimeFrame.Visible = true
 	BackpackFrame.Visible = false
+	DupeFrame.Visible = false
 end)
 
 LogButton.Name = "LogButton"
@@ -466,6 +475,7 @@ LogButton.MouseButton1Click:Connect(function()
 	MuteFrame.Visible = false
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
+	DupeFrame.Visible = false
 end)
 
 SettingsLabl.Name = "SettingsLabl"
@@ -653,11 +663,11 @@ Set.MouseButton1Click:Connect(function()
 					v.TimePosition = TimePosition.Text
 				end
 			end
-		        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do --bplay timeposition for yourself.
-		            if v:IsA'Sound'then
-		            v.TimePosition = TimePosition.Text
-		        end
-		    end
+			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do --bplay timeposition for yourself.
+				if v:IsA'Sound'then
+					v.TimePosition = TimePosition.Text
+				end
+			end
 		end
 	end
 end)
@@ -771,6 +781,7 @@ BackpackButton.MouseButton1Click:Connect(function()
 	MuteFrame.Visible = false
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = true
+	DupeFrame.Visible = false
 end)
 
 MessageBox.Name = "MessageBox"
@@ -870,6 +881,80 @@ RFECheck.TextColor3 = Color3.fromRGB(255, 170, 0)
 RFECheck.TextSize = 14.000
 RFECheck.TextWrapped = true
 
+DupeFrame.Name = "DupeFrame"
+DupeFrame.Parent = TopTab
+DupeFrame.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+DupeFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+DupeFrame.BorderSizePixel = 0
+DupeFrame.Position = UDim2.new(0.310000002, 0, 0.999999464, 0)
+DupeFrame.Size = UDim2.new(0, 344, 0, 235)
+DupeFrame.Visible = false
+
+DupeButton.Name = "DupeButton"
+DupeButton.Parent = SettingsFrame
+DupeButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+DupeButton.BorderSizePixel = 0
+DupeButton.Position = UDim2.new(0.102564104, 0, 0.656127691, 0)
+DupeButton.Size = UDim2.new(0, 123, 0, 34)
+DupeButton.Font = Enum.Font.Gotham
+DupeButton.Text = "Dupe"
+DupeButton.TextColor3 = Color3.fromRGB(255, 170, 0)
+DupeButton.TextSize = 25.000
+DupeButton.MouseButton1Click:Connect(function()
+	DupeFrame.Visible = true
+	MainFrame.Visible = false
+	LogFrame.Visible = false
+	MuteFrame.Visible = false
+	TimeFrame.Visible = false
+	BackpackFrame.Visible = false
+end)
+
+Dupe.Name = "Dupe"
+Dupe.Parent = DupeFrame
+Dupe.BackgroundColor3 = Color3.fromRGB(255, 170, 0)
+Dupe.Position = UDim2.new(0.209253937, 0, 0.336170197, 0)
+Dupe.Size = UDim2.new(0, 200, 0, 50)
+Dupe.Font = Enum.Font.GothamBold
+Dupe.Text = "DUPE"
+Dupe.TextColor3 = Color3.fromRGB(135, 90, 0)
+Dupe.TextSize = 25.000
+Dupe.TextWrapped = true
+Dupe.MouseButton1Click:Connect(function()
+dupe = not dupe
+UnDupe.Visible = true
+Dupe.Visible = false
+end)
+
+UnDupe.Name = "Dupe"
+UnDupe.Parent = DupeFrame
+UnDupe.BackgroundColor3 = Color3.fromRGB(255, 170, 0)
+UnDupe.Position = UDim2.new(0.209253937, 0, 0.336170197, 0)
+UnDupe.Size = UDim2.new(0, 200, 0, 50)
+UnDupe.Font = Enum.Font.GothamBold
+UnDupe.Text = "UNDUPE"
+UnDupe.TextColor3 = Color3.fromRGB(135, 90, 0)
+UnDupe.TextSize = 25.000
+UnDupe.TextWrapped = true
+UnDupe.Visible = false
+UnDupe.MouseButton1Click:Connect(function()
+Dupe.Visible = true
+UnDupe.Visible = false
+dupe = false
+end)
+
+Info_2.Name = "Info"
+Info_2.Parent = DupeFrame
+Info_2.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Info_2.BackgroundTransparency = 1.000
+Info_2.BorderSizePixel = 0
+Info_2.Position = UDim2.new(0.111058429, 0, 0.646808505, 0)
+Info_2.Size = UDim2.new(0, 267, 0, 37)
+Info_2.Font = Enum.Font.GothamBold
+Info_2.Text = "Click to dupe and click again if you're satisfied with the current amount"
+Info_2.TextColor3 = Color3.fromRGB(255, 170, 0)
+Info_2.TextSize = 14.000
+Info_2.TextWrapped = true
+
 if game.SoundService.RespectFilteringEnabled == true then
 	RFECheck.Text = "RespectFilteringEnabled: true"
 elseif game.SoundService.RespectFilteringEnabled == false then
@@ -908,40 +993,61 @@ rs.Stepped:Connect(function() --antimute
 				end
 			end
 		end
-	for i,v in pairs(game.Players.Backpack:GetDescendants()) do
-              if v:IsA'Sound' then
-                if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-                v.Playing = true
-            end
-        end
-    end
-end
+		for i,v in pairs(game.Players.Backpack:GetDescendants()) do
+			if v:IsA'Sound' then
+				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+					v.Playing = true
+				end
+			end
+		end
+	end
 end)
 
 rs.Stepped:Connect(function() --player mute
 	if playermute then
 		local player = GetPlayer(InputNameBox.Text) --add the text box here
 		if player then
-            for i,v in pairs(player:GetDescendants()) do
-                if v:IsA'Sound' and v.Name ~= _player.p.Name then
-                    local c = player.Character
-                    for i,audio in next, c:GetDescendants() do
-                        if audio:IsA("Sound") then
-                            audio.Playing = false
-                        end
-                    end
-                end
-            end
-            for i,v in pairs(player.Backpack:GetDescendants()) do
-                if v:IsA'Sound' and v.Name ~= _player.p.Name then
-                    local c = player.Character
-                    for i,audio in next, c:GetDescendants() do
-                        if audio:IsA("Sound") then
-                            audio.Playing = false
-                        end
-                    end
-                end
-            end
-        end
-    end
+			for i,v in pairs(player:GetDescendants()) do
+				if v:IsA'Sound' and v.Name ~= _player.p.Name then
+					local c = player.Character
+					for i,audio in next, c:GetDescendants() do
+						if audio:IsA("Sound") then
+							audio.Playing = false
+						end
+					end
+				end
+			end
+			for i,v in pairs(player.Backpack:GetDescendants()) do
+				if v:IsA'Sound' and v.Name ~= _player.p.Name then
+					local c = player.Character
+					for i,audio in next, c:GetDescendants() do
+						if audio:IsA("Sound") then
+							audio.Playing = false
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+
+dupe = false
+rs = game:GetService("RunService") --dupe system thats really bad
+rs.Stepped:Connect(function()
+	if dupe then
+		workspace[_player.p.Name].Humanoid.Health = 0
+		local pos = workspace[_player.p.Name].HumanoidRootPart.Position -- grabs your position
+		workspace.Marleyify.HumanoidRootPart.CFrame = CFrame.new(0,500,0)
+		for i,tool in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
+			if tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "Radio" or tool.Name == "SuperFlyGoldBoombox" then
+				tool.Parent = game.Players.LocalPlayer.Character
+			end
+		end
+		for i,tool in pairs(workspace:GetDescendants()) do
+			if tool:IsA'Tool' then
+				tool.Parent = workspace
+				tool.Handle.CFrame = CFrame.new(pos) --takes the tools position and replaces it with yours
+			end
+		end
+	end
 end)
