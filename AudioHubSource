@@ -1,4 +1,4 @@
--- ok the log feature is definitely fixed.
+-- log feature is just broken and i cant fix it ok so cry about it
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -732,11 +732,13 @@ local player = GetPlayer(InputName.Text)
 		if c then
 			for i,v in pairs(c:GetDescendants()) do
 				if v:IsA'Sound' then
+				    if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
 					setclipboard(v.SoundId)
 				end
 			end
 	    end
-     end
+    end
+end
 end)
 
 Info.Name = "Info"
