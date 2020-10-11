@@ -1,4 +1,4 @@
--- log feature is just broken and i cant fix it ok so cry about it
+-- i optimized the FUCK out of the dupe
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -1079,32 +1079,24 @@ end)
 dupe = false
 rs = game:GetService("RunService") --dupe system thats really bad
 rs.Stepped:Connect(function()
-	if dupe then
-		workspace[_player.p.Name].Humanoid.Health = 0
-		local pos = workspace[_player.p.Name].HumanoidRootPart.Position -- grabs your position
-		for i,tool in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
-			if tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "Radio" or tool.Name == "SuperFlyGoldBoombox" then
-				tool.Parent = game.Players.LocalPlayer.Character
-			end
-		end
-		for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
-			if tool:IsA'Tool' then
-				tool.Handle.CFrame = CFrame.new(0,5000,0)
-				tool.Parent = workspace
-				tool.Handle.CFrame = CFrame.new(pos)--takes the tools position and replaces it with yours
-			end
-		end
-		for i,v in pairs(workspace:GetChildren()) do
-			if (v:IsA"Tool" and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "BoomboxGearThree" or v.Name == "Radio") then
-				if v:FindFirstChild("Handle") then
-					repeat
-						wait(.5)
-						if _player.c() then
-							v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
-						end
-					until v.Parent == _player.c()
-				end
-			end
-		end
-	end
+if dupe then
+for i,v in pairs(_player.b():GetDescendants()) do --checks for tools in backpack
+    if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+        v.Parent = _player.c()
+    end
+end
+
+for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
+    if(tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "SuperFlyGoldBoombox" or tool.Name == "Radio") then
+        tool.Parent = workspace -- drops the radios into workspace
+        _player.c()["Humanoid"].Health = 0
+        repeat
+            wait(.5)
+            if _player.c() then
+                v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+            end
+        until v.Parent == _player.c()
+    end
+end
+end
 end)
