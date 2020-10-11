@@ -1,4 +1,4 @@
--- i optimized the FUCK out of the dupe
+-- i fixed the dupe and its like a bit faster now i guess
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -1089,9 +1089,9 @@ end
 for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
     if(tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "SuperFlyGoldBoombox" or tool.Name == "Radio") then
         tool.Parent = workspace -- drops the radios into workspace
-        _player.c()["Humanoid"].Health = 0
         repeat
             wait(.5)
+            _player.c()["Humanoid"].Health = 0
             if _player.c() then
                 v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
             end
