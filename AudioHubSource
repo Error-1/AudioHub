@@ -1,4 +1,4 @@
--- log feature is just broken and i cant fix it ok so cry about it
+-- optimized the dupe AGAIN
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
