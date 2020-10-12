@@ -1,4 +1,4 @@
--- optimized the dupe AGAIN
+-- changed the anti-log due to legal reasons
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -84,162 +84,8 @@ _player = {
 }
 
 local function tohex(num)
-	return "0x" .. string.format("%x",tostring(num))
+    return "0x" .. string.format("%x",tostring(num))
 end
-
-local function javaencode(str)
-	str = tostring(str)
-	str = str:gsub(".",function(sym)
-		return string.format("%%%x",string.byte(sym))
-	end)
-	return str
-end
-
-local function toversionid(id)
-	local content = game:HttpGet("http://www.roblox.com/studio/plugins/info?assetId="..id)
-	if string.find(content, 'value="') then 
-		local epic = string.find(content, 'value="')
-		local almost = string.sub(content, epic + 7, epic + 18)
-		local filter1 = string.gsub(almost, " ", "")
-		local filter2 = string.gsub(filter1, "/", "")
-		local filter3 = string.gsub(filter2, ">", "")
-		local filter4 = string.gsub(filter3, '"', "")
-		local versionid = string.gsub(filter4, "<", "")
-		return versionid
-	end
-end
-
-local function generateFakeAudio()
-	local fakeaudios = {}
-	local function gen()
-		return 5 .. math.random(1,5) .. math.random(1,5) .. math.random(1,5) .. math.random(1,9) .. math.random(1,9) .. math.random(1,9) .. math.random(1,9) .. math.random(1,9) .. math.random(1,9)
-	end
-	for i = 1,10 do
-		table.insert(fakeaudios,gen())
-	end
-	return tohex(fakeaudios[math.random(1,#fakeaudios)])
-end
-
-local function generateCapitalizedString(str)
-	local toRandomize = tostring(str)
-	local toReturn = ""
-	for i = 1,string.len(toRandomize) do
-		local choose = math.random(1,2)
-		if choose == 1 then
-			toReturn = toReturn .. toRandomize:sub(i,i):upper()
-		else
-			toReturn = toReturn .. toRandomize:sub(i,i):lower()
-		end
-	end
-	return toReturn
-end
-
-local function generateBait()
-	if encodeb and encode then
-		return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(generateFakeAudio()) .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(generateFakeAudio())
-	elseif encodeb and not encode then
-		return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. generateFakeAudio() .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. generateFakeAudio()
-	elseif not encodeb and not encode then
-		return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. generateFakeAudio() .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. generateFakeAudio()
-	elseif not encodeb and encode then
-		return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(generateFakeAudio()) .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(generateFakeAudio())
-	end
-end
-
-local function generateBaitAR(num)
-	if num == 1 then
-		if encodeb and encode then
-			return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(generateFakeAudio()) .. "&" .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(generateFakeAudio())
-		elseif encodeb and not encode then
-			return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. generateFakeAudio() .. "&" .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. generateFakeAudio()
-		elseif not encodeb and not encode then
-			return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. generateFakeAudio() .. "&" .. generateCapitalizedString("assetversionid") .. "=" .. generateFakeAudio()
-		elseif not encodeb and encode then
-			return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(generateFakeAudio()) .. "&" .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(generateFakeAudio())
-		end
-	else
-		if encodeb and encode then
-			return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(generateFakeAudio()) .. "&" .. javaencode(generateCapitalizedString("assetversionid")) .. "%3d" .. javaencode(generateFakeAudio())
-		elseif encodeb and not encode then
-			return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. generateFakeAudio() .. "&" .. javaencode(generateCapitalizedString("assetversionid")) .. "%3d" .. generateFakeAudio()
-		elseif not encodeb and not encode then
-			return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. generateFakeAudio() .. "&" .. generateCapitalizedString("assetversionid") .. "%3d" .. generateFakeAudio()
-		elseif not encodeb and encode then
-			return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(generateFakeAudio()) .. "&" .. generateCapitalizedString("assetversionid") .. "%3d" .. javaencode(generateFakeAudio())
-		end
-	end
-end
-
-local function returnReal(id)
-	if encodeb and encode then
-		return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(generateFakeAudio()) .. "&" .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. javaencode(id)
-	elseif encodeb and not encode then
-		return "&" .. javaencode("&") .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. generateFakeAudio() .. "&" .. javaencode(generateCapitalizedString("assetversionid")) .. "=" .. id
-	elseif not encodeb and not encode then
-		return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. generateFakeAudio() .. "&" .. generateCapitalizedString("assetversionid") .. "=" .. id
-	elseif not encodeb and encode then
-		return "&" .. javaencode("&") .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(generateFakeAudio()) .. "&" .. generateCapitalizedString("assetversionid") .. "=" .. javaencode(id)
-	end
-end
-
-local function encrypt(id)
-	local id = toversionid(id)
-	local id = tohex(id)
-	local pid = nil
-	if cusm then
-		if CustomTextBox.Text == "" then
-			pid = ""
-		else
-			pid = "" .. CustomTextBox.Text
-		end   
-	else
-		pid = "\n"..CustomTextBox.Text.."\n"
-	end
-	if ext then
-		pid = pid .. ""
-	else
-		pid = pid .. ""
-	end
-	local t = {}
-	for i = 1,10 do
-		t[i] = {generateBait(),"fake"}
-	end
-	t[math.random(1,#t)] = {returnReal(id),"real"}
-	for i = 1,#t do
-		if t[i][2] == "real" then
-			if i ~= 1 then
-				t[i-1] = {generateBaitAR(2),"fake"}
-			end
-			for i2 = i+1,#t do
-				t[i2] = {generateBaitAR(1),"fake"}
-			end
-		end
-	end
-	local function spaceout(str)
-		local gay = ""
-		for i = 1,#str do
-			gay = gay .. str:sub(i,i) .. (" "):rep(math.random(10,50))
-		end
-		return gay
-	end
-	for i,v in pairs(t) do
-		if spacespam then
-			if newlinespan then
-				pid = pid .. spaceout(v[1]) .. "\n"
-			else
-				pid = pid .. spaceout(v[1])
-			end
-		else
-			if newlinespam then
-				pid = pid .. v[1] .. "\n"
-			else
-				pid = pid .. v[1]
-			end
-		end
-	end
-	return pid
-end
-
 
 --Properties:
 
@@ -312,20 +158,20 @@ PlayButton.MouseButton1Click:Connect(function()
 				v.Parent = _player.c()
 				local tool = _player.c():FindFirstChildOfClass("Tool")
 				if tool then
-					tool:FindFirstChildOfClass("RemoteEvent"):FireServer("play",encrypt(InputAudBox.Text))
+					tool:FindFirstChildOfClass("RemoteEvent"):FireServer("play",tohex((InputAudBox.Text)))
 				end
 				return
 			end
 		end
 	elseif game.PlaceId == 177052655 then
-		game.ReplicatedStorage.Event:FireServer("PlayRadio", game.Players[_player.p.Name], encrypt(InputAudBox.Text))
+		game.ReplicatedStorage.Event:FireServer("PlayRadio", game.Players[_player.p.Name], tohex((InputAudBox.Text)))
 	elseif game.PlaceId ~= 177052655 or game.PlaceId ~= 455366377 or game.PlaceId ~= 4669040 then
 		for i,v in pairs(_player.b():GetChildren()) do
 			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
 				v.Parent = _player.c()
 				local tool = _player.c():FindFirstChildOfClass("Tool")
 				if tool then
-					tool:FindFirstChildOfClass("RemoteEvent"):FireServer("PlaySong",encrypt(InputAudBox.Text))
+					tool:FindFirstChildOfClass("RemoteEvent"):FireServer("PlaySong",tohex((InputAudBox.Text)))
 				end
 				return
 			end
@@ -837,7 +683,7 @@ PlayButton2.MouseButton1Click:Connect(function()
 	
 	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
 		if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
-			v:FindFirstChildOfClass'RemoteEvent':FireServer("PlaySong",encrypt(AudBox.Text))
+			v:FindFirstChildOfClass'RemoteEvent':FireServer("PlaySong",tohex((AudBox.Text)))
 		end
 	end
 	
