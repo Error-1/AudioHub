@@ -1,4 +1,3 @@
--- credits to jack aka: dot_mp4 for some of the scripts
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -93,7 +92,7 @@ local function tohex(num)
     return "0x" .. string.format("%x",tostring(num))
 end
 
-local function javaencode(str)
+local function g(str)
     str = tostring(str)
     str = str:gsub(".",function(sym)
         return string.format("%%%x",string.byte(sym))
@@ -101,15 +100,34 @@ local function javaencode(str)
     return str
 end
 
-function mask(id)
-    local x = tohex(id)
-    local v = ""
-    for i = 1,1 do
-        v = v .. tostring(x)
+local function bd(id)
+    local content = game:HttpGet("http://www.roblox.com/studio/plugins/info?assetId="..id)
+    if string.find(content, 'value="') then 
+        local epic = string.find(content, 'value="')
+        local almost = string.sub(content, epic + 7, epic + 18)
+        local filter1 = string.gsub(almost, " ", "")
+        local filter2 = string.gsub(filter1, "/", "")
+        local filter3 = string.gsub(filter2, ">", "")
+        local filter4 = string.gsub(filter3, '"', "")
+        local versionid = string.gsub(filter4, "<", "")
+        return versionid
     end
-    local b = v .. "&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd)).."&.AsSeTvErSiOnId="..tohex(RandomString(asd))
+end
+
+
+
+function mask(id)
+    local x = g(id)
+    local x = bd(id)
+    local v = ""
+    local dzx = CustomTextBox.Text
+    local ww = MessageBox.Text
+    for i = 1,1 do
+        v = v
+    end
+    local b = v .. "&AsSeTvErSiOnId="..g(tohex(tostring(x))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd)))
     for i=1,1 do
-        b = b .. "\n\n"..CustomTextBox.Text or MessageBox.Text
+        b = b .. ""
     end
     for i=1,1 do
         b = b .. ""
