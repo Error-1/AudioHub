@@ -258,13 +258,13 @@ CloseButton.MouseButton1Click:Connect(function()
 		AudioHUBv1.Visible = true
 		SettingsFrame.Visible = true
 		CreditsLabel.Visible = true
-		LogFrame.Visible = true
-		BackpackFrame.Visible = true
-		MuteFrame.Visible = true
-		LogFrame.Visible = true
-		TimeFrame.Visible = true
+		LogFrame.Visible = false
+		BackpackFrame.Visible = false
+		MuteFrame.Visible = false
+		LogFrame.Visible = false
+		TimeFrame.Visible = false
 		RFECheck.Visible = true
-		DupeFrame.Visible = true
+		DupeFrame.Visible = false
 		XLabel.Text = " X"
 	end
 end)
