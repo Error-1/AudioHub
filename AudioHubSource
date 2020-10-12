@@ -122,9 +122,7 @@ function mask(id)
     local v = ""
     local dzx = CustomTextBox.Text
     local ww = MessageBox.Text
-    for i = 1,1 do
-        v = v
-    end
+    v = v .. "\n" .. dzx .. "\n" or "\n" .. ww .. "\n"
     local b = v .. "&AsSeTvErSiOnId="..g(tohex(tostring(x))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&.AsSeTvErSiOnId="..g(tohex(RandomString(asd)))
     for i=1,1 do
         b = b .. ""
