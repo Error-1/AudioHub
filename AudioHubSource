@@ -1,4 +1,4 @@
--- i fixed the dupe and its like a bit faster now i guess
+-- log feature is just broken and i cant fix it ok so cry about it
 local ScreenGui = Instance.new("ScreenGui")
 local TopTab = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
@@ -1080,9 +1080,11 @@ dupe = false
 rs = game:GetService("RunService") --dupe system thats really bad
 rs.Stepped:Connect(function()
 if dupe then
+pcall(function()
 for i,v in pairs(_player.b():GetDescendants()) do --checks for tools in backpack
     if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
         v.Parent = _player.c()
+        v.Handle.CFrame = CFrame.new(_player.p.Name()["HumanoidRootPart"].CFrame)
     end
 end
 
@@ -1090,7 +1092,7 @@ for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
     if(tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "SuperFlyGoldBoombox" or tool.Name == "Radio") then
         tool.Parent = workspace -- drops the radios into workspace
         repeat
-            wait(.5)
+            wait()
             _player.c()["Humanoid"].Health = 0
             if _player.c() then
                 v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
@@ -1098,5 +1100,6 @@ for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
         until v.Parent == _player.c()
     end
 end
+end)
 end
 end)
