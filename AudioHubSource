@@ -625,9 +625,10 @@ LogButton_2.MouseButton1Click:Connect(function()
 	local player = GetPlayer(InputName.Text)
 	if player then
 		local c = player.Character
+		local b = player.Backpack
 		if c then
 			for i,v in pairs(c:GetDescendants()) do
-				if v:IsA'Sound' then
+				if(v:IsA'Sound') then
 					if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
 						if seturl == false then
 							setclipboard(tonumber(string.match(v.SoundId, "%d+")))
@@ -637,8 +638,19 @@ LogButton_2.MouseButton1Click:Connect(function()
 					end
 				end
 			end
+			for i,v in pairs(b:GetDescendants()) do
+			if(v:IsA'Sound') then
+			    if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+				   if seturl == false then
+			        setclipboard(tonumber(string.match(v.SoundId, "%d+")))
+				elseif seturl == true then
+					setclipboard(tostring(v.SoundId))
+				end
+			end
 		end
 	end
+end
+end
 end)
 
 Info.Name = "Info"
@@ -904,6 +916,16 @@ rs.Stepped:Connect(function() --servermute
 		for i,v in pairs(_player.all()) do
 			if v.Name ~= _player.n() then
 				for i,audio in next, v.Character:GetDescendants() do
+					if audio:IsA("Sound") then
+						audio.Playing = false
+					end
+				end
+			end
+		end
+		for i,v in pairs(_player.all().Backpack:GetDescendants()) do
+			if v:IsA'Sound' and v.Name ~= _player.p.Name then
+				local c = player.Character
+				for i,audio in next, c:GetDescendants() do
 					if audio:IsA("Sound") then
 						audio.Playing = false
 					end
