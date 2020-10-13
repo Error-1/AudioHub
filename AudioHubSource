@@ -840,7 +840,7 @@ UnDupe.MouseButton1Click:Connect(function()
 				repeat
 					wait()
 					if _player.c() then
-						v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+						v.Handle.CFrame = _player.c()["Torso"].CFrame
 					end
 				until v.Parent == _player.c()
 			end
@@ -997,7 +997,7 @@ for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
         tool.Parent = workspace -- drops the radios into workspace
         repeat
             wait()
-            _player.c()["Humanoid"].Health = 0
+            _player.c():BreakJoints()
             if _player.c() then
                 v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
             end
