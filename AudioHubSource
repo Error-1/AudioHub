@@ -973,6 +973,7 @@ dupe = false
 rs = game:GetService("RunService") --dupe system thats really bad
 rs.Stepped:Connect(function()
 if dupe then
+pcall(function()
 for i,v in pairs(_player.b():GetDescendants()) do --checks for tools in backpack
     if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
         v.Parent = _player.c()
@@ -992,5 +993,6 @@ for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
         until v.Parent == _player.c()
     end
 end
+end)
 end
 end)
