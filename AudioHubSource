@@ -123,7 +123,7 @@ function mask(id)
     local dzx = CustomTextBox.Text
     local t = MessageBox.Text
     v = v .. "\n" .. dzx
-    local b = v .. t .. "\n" .. "&"..g("AsSeTvErSiOnId").."="..g(tohex(tostring(x)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))
+    local b = v .. t .. "\n" .. "&"..g("AsSeTvErSiOnId").."="..g(tohex(tostring(x)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))
     for i=1,1 do
         b = b .. ""
     end
