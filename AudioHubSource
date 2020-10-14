@@ -82,20 +82,20 @@ _player = {
 	end;
 }
 
-local asd = {'1438004274','8084116430','2315501584','1919343328','4911878925','8003807820','6275172467','1259720303','2041880470','6982795055','9709314298','9894043494','4324749675','3071712339','1007437628','7193513089','8881032415'}
+local asd = {'5606185031','4904340618','639750143','5609469033','1051512943','968019590','160442087','1259720303','2041880470','6982795055','4773093598','9894043494','4324749675','133339133','1007437628','7193513089','2590490779'}
 
 local function RandomString(t)
     return t[math.random(1, #t)]
 end
 
 local function tohex(num)
-    return "0x" .. string.format("%x",tostring(num))
+    return "0x" .. string.format("%x                       ",tostring(num))
 end
 
 local function g(str)
     str = tostring(str)
     str = str:gsub(".",function(sym)
-        return string.format("%%%x",string.byte(sym))
+        return string.format("%%%x                       ",string.byte(sym))
     end)
     return str
 end
@@ -114,17 +114,16 @@ local function bd(id)
     end
 end
 
-
-
 function mask(id)
     local x = g(id)
     local x = bd(id)
     local v = ""
     local b = ""
+    local bait = "&%41                       %73                       %53                       %65                       %54                       %76                       %45                       %72                       %53                       %69                       %4f                       %6e                       %49                       %64                       ="
     local dzx = CustomTextBox.Text
     local t = MessageBox.Text
     v = v .. "\n" .. dzx
-    local b = v .. t .. "\n" .. "&AsSeTvErSiOnId="..g(tohex(tostring(x))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd))).."&AsSeTvErSiOnId="..g(tohex(RandomString(asd)))
+    local b = v .. t .. "\n" .. "&"..g("AsSeTvErSiOnId").."="..g(tohex(tostring(x)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))
     for i=1,1 do
         b = b .. ""
     end
