@@ -998,7 +998,7 @@ for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
             wait()
             _player.c():BreakJoints()
             if _player.c() then
-                v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+                _player.c()["HumanoidRootPart"].CFrame = v.Handle.CFrame
             end
         until v.Parent == _player.c()
     end
