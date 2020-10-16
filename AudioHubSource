@@ -1172,6 +1172,7 @@ rs.Stepped:Connect(function()
 	end	
 end)
 
+antimute = not antimute
 rs.Stepped:Connect(function()--antimute
 	if antimute then
 		if game.PlaceId == 177052655 then
