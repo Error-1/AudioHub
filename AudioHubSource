@@ -899,8 +899,7 @@ elseif game.SoundService.RespectFilteringEnabled == false then
 	RFECheck.Text = "RespectFilteringEnabled: false"
 end
 
-rs.Stepped:Connect(function()
-rs.Stepped:Connect(function()
+
 rs.Stepped:Connect(function() --servermute
 	if servermute then
 		for i,v in pairs(_player.all()) do
@@ -924,18 +923,16 @@ rs.Stepped:Connect(function() --servermute
 		end
 	end
 end)
-end)
-end)
 
 antimute = true
-rs.Stepped:Connect(function()
 rs.Stepped:Connect(function()--antimute
-rs.Stepped:Connect(function()
 	if antimute then
 		if game.PlaceId == 177052655 then
 			for i,unmute in pairs(game.Workspace.Ignore.Players[_player.p.Name].Torso:GetDescendants()) do
 				if unmute:IsA'Sound' then
+				    while wait() do
 					unmute.Playing = true
+					end
 				end
 			end
 		end
@@ -943,25 +940,25 @@ rs.Stepped:Connect(function()
 		for i,v in pairs(game.Workspace[_player.p.Name]:GetDescendants()) do
 			if v:IsA'Sound' then
 				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+					while wait() do
 					v.Playing = true
+					end
 				end
 			end
 		end
-		for i,v in pairs(game.Players.Backpack:GetDescendants()) do
+	end
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
 			if v:IsA'Sound' then
 				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-					v.Playing = true
+				while wait() do
+				v.Playing = true
 				end
 			end
 		end
 	end
 end)
-end)
-end)
 
-rs.Stepped:Connect(function()
-rs.Stepped:Connect(function()--player mute
-rs.Stepped:Connect(function()
+rs.Stepped:Connect(function()--player mute)
 	if playermute then
 		local player = GetPlayer(InputNameBox.Text) --add the text box here
 		if player then
@@ -987,8 +984,6 @@ rs.Stepped:Connect(function()
 			end
 		end
 	end
-end)
-end)
 end)
 
 dupe = false
