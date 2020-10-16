@@ -940,9 +940,7 @@ rs.Stepped:Connect(function()--antimute
 		for i,v in pairs(game.Workspace[_player.p.Name]:GetDescendants()) do
 			if v:IsA'Sound' then
 				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-					while wait() do
 					v.Playing = true
-					end
 				end
 			end
 		end
@@ -950,9 +948,7 @@ rs.Stepped:Connect(function()--antimute
 		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
 			if v:IsA'Sound' then
 				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-				while wait() do
 				v.Playing = true
-				end
 			end
 		end
 	end
