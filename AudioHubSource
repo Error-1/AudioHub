@@ -1151,6 +1151,7 @@ rs.Stepped:Connect(function() --servermute
 				end
 			end
 		end
+		pcall(function()
 		for i,v in pairs(_player.all().Backpack:GetDescendants()) do
 			if v:IsA'Sound' and v.Name ~= _player.p.Name then
 				local c = player.Character
@@ -1161,6 +1162,7 @@ rs.Stepped:Connect(function() --servermute
 				end
 			end
 		end
+		end)
 	end
 end)
 	
@@ -1175,9 +1177,7 @@ rs.Stepped:Connect(function()--antimute
 		if game.PlaceId == 177052655 then
 			for i,unmute in pairs(game.Workspace.Ignore.Players[_player.p.Name].Torso:GetDescendants()) do
 				if unmute:IsA'Sound' then
-					while wait() do
-						unmute.Playing = true
-					end
+				   unmute.Playing = true
 				end
 			end
 		end
@@ -1185,9 +1185,7 @@ rs.Stepped:Connect(function()--antimute
 		for i,v in pairs(game.Workspace[_player.p.Name]:GetDescendants()) do
 			if v:IsA'Sound' then
 				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-					while wait() do
-						v.Playing = true
-					end
+					v.Playing = true
 				end
 			end
 		end
