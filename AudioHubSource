@@ -899,6 +899,8 @@ elseif game.SoundService.RespectFilteringEnabled == false then
 	RFECheck.Text = "RespectFilteringEnabled: false"
 end
 
+rs.Stepped:Connect(function()
+rs.Stepped:Connect(function()
 rs.Stepped:Connect(function() --servermute
 	if servermute then
 		for i,v in pairs(_player.all()) do
@@ -922,9 +924,13 @@ rs.Stepped:Connect(function() --servermute
 		end
 	end
 end)
+end)
+end)
 
-antimute = not antimute
-rs.Stepped:Connect(function() --antimute
+antimute = true
+rs.Stepped:Connect(function()
+rs.Stepped:Connect(function()--antimute
+rs.Stepped:Connect(function()
 	if antimute then
 		if game.PlaceId == 177052655 then
 			for i,unmute in pairs(game.Workspace.Ignore.Players[_player.p.Name].Torso:GetDescendants()) do
@@ -950,8 +956,12 @@ rs.Stepped:Connect(function() --antimute
 		end
 	end
 end)
+end)
+end)
 
-rs.Stepped:Connect(function() --player mute
+rs.Stepped:Connect(function()
+rs.Stepped:Connect(function()--player mute
+rs.Stepped:Connect(function()
 	if playermute then
 		local player = GetPlayer(InputNameBox.Text) --add the text box here
 		if player then
@@ -977,6 +987,8 @@ rs.Stepped:Connect(function() --player mute
 			end
 		end
 	end
+end)
+end)
 end)
 
 dupe = false
