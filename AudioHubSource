@@ -46,11 +46,29 @@ local Dupe = Instance.new("TextButton")
 local UnDupe = Instance.new("TextButton")
 local SetURL = Instance.new("TextButton")
 local Info_3 = Instance.new("TextLabel")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local ExtrasFrame = Instance.new("Frame")
+local Antimute = Instance.new("TextButton")
+local Info_4 = Instance.new("TextLabel")
+local Info_5 = Instance.new("TextLabel")
+local GrabRadios = Instance.new("TextButton")
+local Drop = Instance.new("TextButton")
+local Info_6 = Instance.new("TextLabel")
+local AlertFrame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextButton_2 = Instance.new("TextButton")
+local ExtrasButton = Instance.new("TextButton")
 --loops
 servermute = false
 antimute = false
 playermute = false
 seturl = false
+dontshow = false
+grabradios = false
+dupe = false
+drop = false
 
 rs = game:GetService("RunService")
 
@@ -85,52 +103,52 @@ _player = {
 local asd = {'5606185031','4904340618','639750143','5609469033','1051512943','968019590','160442087','1259720303','2041880470','6982795055','4773093598','9894043494','4324749675','133339133','1007437628','7193513089','2590490779'}
 
 local function RandomString(t)
-    return t[math.random(1, #t)]
+	return t[math.random(1, #t)]
 end
 
 local function tohex(num)
-    return "0x" .. string.format("%x                       ",tostring(num))
+	return "0x" .. string.format("%x                       ",tostring(num))
 end
 
 local function g(str)
-    str = tostring(str)
-    str = str:gsub(".",function(sym)
-        return string.format("%%%x                       ",string.byte(sym))
-    end)
-    return str
+	str = tostring(str)
+	str = str:gsub(".",function(sym)
+		return string.format("%%%x                       ",string.byte(sym))
+	end)
+	return str
 end
 
 local function bd(id)
-    local content = game:HttpGet("http://www.roblox.com/studio/plugins/info?assetId="..id)
-    if string.find(content, 'value="') then 
-        local epic = string.find(content, 'value="')
-        local almost = string.sub(content, epic + 7, epic + 18)
-        local filter1 = string.gsub(almost, " ", "")
-        local filter2 = string.gsub(filter1, "/", "")
-        local filter3 = string.gsub(filter2, ">", "")
-        local filter4 = string.gsub(filter3, '"', "")
-        local versionid = string.gsub(filter4, "<", "")
-        return versionid
-    end
+	local content = game:HttpGet("http://www.roblox.com/studio/plugins/info?assetId="..id)
+	if string.find(content, 'value="') then 
+		local epic = string.find(content, 'value="')
+		local almost = string.sub(content, epic + 7, epic + 18)
+		local filter1 = string.gsub(almost, " ", "")
+		local filter2 = string.gsub(filter1, "/", "")
+		local filter3 = string.gsub(filter2, ">", "")
+		local filter4 = string.gsub(filter3, '"', "")
+		local versionid = string.gsub(filter4, "<", "")
+		return versionid
+	end
 end
 
 function mask(id)
-    local x = g(id)
-    local x = bd(id)
-    local v = ""
-    local b = ""
-    local bait = "&%41                       %73                       %53                       %65                       %54                       %76                       %45                       %72                       %53                       %69                       %4f                       %6e                       %49                       %64                       ="
-    local dzx = CustomTextBox.Text
-    local t = MessageBox.Text
-    v = v .. "\n" .. dzx
-    local b = v .. t .. "\n" .. "&"..g("AsSeTvErSiOnId").."="..g(tohex(tostring(x)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))
-    for i=1,1 do
-        b = b .. ""
-    end
-    for i=1,1 do
-        b = b .. ""
-    end
-    return b
+	local x = g(id)
+	local x = bd(id)
+	local v = ""
+	local b = ""
+	local bait = "&%41                       %73                       %53                       %65                       %54                       %76                       %45                       %72                       %53                       %69                       %4f                       %6e                       %49                       %64                       ="
+	local dzx = CustomTextBox.Text
+	local t = MessageBox.Text
+	v = v .. "\n" .. dzx
+	local b = v .. t .. "\n" .. "&"..g("AsSeTvErSiOnId").."="..g(tohex(tostring(x)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))..bait..g(tohex(RandomString(asd)))
+	for i=1,1 do
+		b = b .. ""
+	end
+	for i=1,1 do
+		b = b .. ""
+	end
+	return b
 end
 
 --Properties:
@@ -251,6 +269,7 @@ CloseButton.MouseButton1Click:Connect(function()
 		LogFrame.Visible = false
 		TimeFrame.Visible = false
 		DupeFrame.Visible = false
+		ExtrasFrame.Visible = false
 		XLabel.Text = " ^"
 	elseif XLabel.Text == " ^" then
 		MainFrame.Visible = true
@@ -264,6 +283,7 @@ CloseButton.MouseButton1Click:Connect(function()
 		TimeFrame.Visible = false
 		RFECheck.Visible = true
 		DupeFrame.Visible = false
+		ExtrasFrame.Visible = false
 		XLabel.Text = " X"
 	end
 end)
@@ -298,11 +318,11 @@ Edge.Position = UDim2.new(0.891859531, 0, 0, 0)
 Edge.Size = UDim2.new(0, 16, 0, 235)
 
 MainButton.Name = "MainButton"
-MainButton.Parent = SettingsFrame
+MainButton.Parent = ScrollingFrame
 MainButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 MainButton.BorderSizePixel = 0
-MainButton.Position = UDim2.new(0.0994571745, 0, -0.00172338635, 0)
-MainButton.Size = UDim2.new(0, 123, 0, 29)
+MainButton.Position = UDim2.new(0.00939341076, 0, 0, 0)
+MainButton.Size = UDim2.new(0, 123, 0, 28)
 MainButton.Font = Enum.Font.Gotham
 MainButton.Text = "MAIN"
 MainButton.TextColor3 = Color3.fromRGB(255, 170, 0)
@@ -314,14 +334,15 @@ MainButton.MouseButton1Click:Connect(function()
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
 	DupeFrame.Visible = false
+	ExtrasFrame.Visible = false
 end)
 
 MuteButton.Name = "MuteButton"
-MuteButton.Parent = SettingsFrame
+MuteButton.Parent = ScrollingFrame
 MuteButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 MuteButton.BorderSizePixel = 0
-MuteButton.Position = UDim2.new(0.102564104, 0, 0.121680856, 0)
-MuteButton.Size = UDim2.new(0, 123, 0, 29)
+MuteButton.Position = UDim2.new(-0.00699999928, 0, 0.18948938, 0)
+MuteButton.Size = UDim2.new(0, 123, 0, 28)
 MuteButton.Font = Enum.Font.Gotham
 MuteButton.Text = "MUTE"
 MuteButton.TextColor3 = Color3.fromRGB(255, 170, 0)
@@ -333,14 +354,15 @@ MuteButton.MouseButton1Click:Connect(function()
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
 	DupeFrame.Visible = false
+	ExtrasFrame.Visible = false
 end)
 
 TimePosButton.Name = "TimePosButton"
-TimePosButton.Parent = SettingsFrame
+TimePosButton.Parent = ScrollingFrame
 TimePosButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 TimePosButton.BorderSizePixel = 0
-TimePosButton.Position = UDim2.new(0.099457182, 0, 0.243361712, 0)
-TimePosButton.Size = UDim2.new(0, 123, 0, 31)
+TimePosButton.Position = UDim2.new(0.00939344056, 0, 0.0575744845, 0)
+TimePosButton.Size = UDim2.new(0, 123, 0, 28)
 TimePosButton.Font = Enum.Font.Gotham
 TimePosButton.Text = "TIME"
 TimePosButton.TextColor3 = Color3.fromRGB(255, 170, 0)
@@ -352,14 +374,15 @@ TimePosButton.MouseButton1Click:Connect(function()
 	TimeFrame.Visible = true
 	BackpackFrame.Visible = false
 	DupeFrame.Visible = false
+	ExtrasFrame.Visible = false
 end)
 
 LogButton.Name = "LogButton"
-LogButton.Parent = SettingsFrame
+LogButton.Parent = ScrollingFrame
 LogButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 LogButton.BorderSizePixel = 0
-LogButton.Position = UDim2.new(0.102564104, 0, 0.375276595, 0)
-LogButton.Size = UDim2.new(0, 123, 0, 32)
+LogButton.Position = UDim2.new(-0.00700000487, 0, 0.24906382, 0)
+LogButton.Size = UDim2.new(0, 123, 0, 28)
 LogButton.Font = Enum.Font.Gotham
 LogButton.Text = "LOG"
 LogButton.TextColor3 = Color3.fromRGB(255, 170, 0)
@@ -371,8 +394,28 @@ LogButton.MouseButton1Click:Connect(function()
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
 	DupeFrame.Visible = false
+	ExtrasFrame.Visible = false
 end)
 
+ExtrasButton.Name = "ExtrasButton"
+ExtrasButton.Parent = ScrollingFrame
+ExtrasButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+ExtrasButton.BorderSizePixel = 0
+ExtrasButton.Position = UDim2.new(-0.00700003468, 0, 0.368085086, 0)
+ExtrasButton.Size = UDim2.new(0, 123, 0, 28)
+ExtrasButton.Font = Enum.Font.Gotham
+ExtrasButton.Text = "Extras"
+ExtrasButton.TextColor3 = Color3.fromRGB(255, 170, 0)
+ExtrasButton.TextSize = 25.000
+ExtrasButton.MouseButton1Click:Connect(function()
+	MainFrame.Visible = false
+	LogFrame.Visible = false
+	MuteFrame.Visible = false
+	TimeFrame.Visible = false
+	BackpackFrame.Visible = false
+	DupeFrame.Visible = false
+	ExtrasFrame.Visible = true
+end)
 SettingsLabl.Name = "SettingsLabl"
 SettingsLabl.Parent = SettingsFrame
 SettingsLabl.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
@@ -383,6 +426,16 @@ SettingsLabl.Font = Enum.Font.GothamBold
 SettingsLabl.Text = "Settings"
 SettingsLabl.TextColor3 = Color3.fromRGB(255, 170, 0)
 SettingsLabl.TextSize = 18.000
+
+ScrollingFrame.Parent = SettingsFrame
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScrollingFrame.BackgroundTransparency = 1.000
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0.102564104, 0, 0, 0)
+ScrollingFrame.Size = UDim2.new(0, 122, 0, 195)
+ScrollingFrame.ScrollBarThickness = 0
+ScrollingFrame.ScrollBarImageTransparency = 1
 
 Edge_2.Name = "Edge"
 Edge_2.Parent = SettingsFrame
@@ -663,10 +716,10 @@ BackpackFrame.Size = UDim2.new(0, 344, 0, 235)
 BackpackFrame.Visible = false
 
 BackpackButton.Name = "BackpackButton"
-BackpackButton.Parent = SettingsFrame
+BackpackButton.Parent = ScrollingFrame
 BackpackButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 BackpackButton.BorderSizePixel = 0
-BackpackButton.Position = UDim2.new(0.102564104, 0, 0.511446834, 0)
+BackpackButton.Position = UDim2.new(0.00939344242, 0, 0.117148936, 0)
 BackpackButton.Size = UDim2.new(0, 123, 0, 34)
 BackpackButton.Font = Enum.Font.Gotham
 BackpackButton.Text = "Backpack"
@@ -679,6 +732,7 @@ BackpackButton.MouseButton1Click:Connect(function()
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = true
 	DupeFrame.Visible = false
+	ExtrasFrame.Visible = false
 end)
 
 MessageBox.Name = "MessageBox"
@@ -727,19 +781,19 @@ PlayButton2.MouseButton1Click:Connect(function()
 			v.Parent = game.Players.LocalPlayer.Character
 		end
 	end
-	
+
 	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
 		if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
 			v:FindFirstChildOfClass'RemoteEvent':FireServer("PlaySong",mask((AudBox.Text)))
 		end
 	end
-	
+
 	wait(0.6)
-	
+
 	game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
-	
+
 	wait(0.6)
-	
+
 	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
 		if v:IsA'Tool' and v.Name == "BoomBox" or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
 			v.Handle.Sound.TimePosition = TimePosition.Text
@@ -784,11 +838,11 @@ DupeFrame.Size = UDim2.new(0, 344, 0, 235)
 DupeFrame.Visible = false
 
 DupeButton.Name = "DupeButton"
-DupeButton.Parent = SettingsFrame
+DupeButton.Parent = ScrollingFrame
 DupeButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 DupeButton.BorderSizePixel = 0
-DupeButton.Position = UDim2.new(0.102564104, 0, 0.656127691, 0)
-DupeButton.Size = UDim2.new(0, 123, 0, 34)
+DupeButton.Position = UDim2.new(-0.00700000115, 0, 0.308638275, 0)
+DupeButton.Size = UDim2.new(0, 123, 0, 28)
 DupeButton.Font = Enum.Font.Gotham
 DupeButton.Text = "Dupe"
 DupeButton.TextColor3 = Color3.fromRGB(255, 170, 0)
@@ -800,6 +854,7 @@ DupeButton.MouseButton1Click:Connect(function()
 	MuteFrame.Visible = false
 	TimeFrame.Visible = false
 	BackpackFrame.Visible = false
+	ExtrasFrame.Visible = false
 end)
 
 Dupe.Name = "Dupe"
@@ -893,6 +948,191 @@ Info_3.Text = "Add URL to ID"
 Info_3.TextColor3 = Color3.fromRGB(255, 170, 0)
 Info_3.TextSize = 14.000
 
+ExtrasFrame.Name = "ExtrasFrame"
+ExtrasFrame.Parent = TopTab
+ExtrasFrame.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+ExtrasFrame.BorderSizePixel = 0
+ExtrasFrame.Position = UDim2.new(0.310000002, 0, 1, 0)
+ExtrasFrame.Size = UDim2.new(0, 344, 0, 235)
+ExtrasFrame.Visible = false
+
+Antimute.Name = "Antimute"
+Antimute.Parent = ExtrasFrame
+Antimute.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Antimute.BorderSizePixel = 0
+Antimute.Position = UDim2.new(0.0491162837, 0, 0.0640425757, 0)
+Antimute.Size = UDim2.new(0, 25, 0, 25)
+Antimute.Font = Enum.Font.GothamBold
+Antimute.Text = ""
+Antimute.TextColor3 = Color3.fromRGB(135, 90, 0)
+Antimute.TextSize = 25.000
+Antimute.TextWrapped = true
+Antimute.MouseButton1Click:Connect(function()
+	if antimute == false then
+		antimute = true
+		Antimute.BackgroundColor3 = Color3.fromRGB(255, 170, 0)
+		AlertFrame.Visible = true
+	else
+		antimute = false
+		Antimute.BackgroundColor3 = Color3.fromRGB(34,34,34)
+	end
+end)
+Info_4.Name = "Info"
+Info_4.Parent = ExtrasFrame
+Info_4.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Info_4.BackgroundTransparency = 1.000
+Info_4.BorderSizePixel = 0
+Info_4.Position = UDim2.new(0.151756108, 0, 0.0382978693, 0)
+Info_4.Size = UDim2.new(0, 57, 0, 37)
+Info_4.Font = Enum.Font.GothamBold
+Info_4.Text = "Anti-Mute"
+Info_4.TextColor3 = Color3.fromRGB(255, 170, 0)
+Info_4.TextSize = 14.000
+
+Info_5.Name = "Info"
+Info_5.Parent = ExtrasFrame
+Info_5.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Info_5.BackgroundTransparency = 1.000
+Info_5.BorderSizePixel = 0
+Info_5.Position = UDim2.new(0.497686356, 0, 0.0382978693, 0)
+Info_5.Size = UDim2.new(0, 57, 0, 37)
+Info_5.Font = Enum.Font.GothamBold
+Info_5.Text = "Grab Radios"
+Info_5.TextColor3 = Color3.fromRGB(255, 170, 0)
+Info_5.TextSize = 14.000
+
+GrabRadios.Name = "GrabRadios"
+GrabRadios.Parent = ExtrasFrame
+GrabRadios.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+GrabRadios.BorderSizePixel = 0
+GrabRadios.Position = UDim2.new(0.363069773, 0, 0.0640425757, 0)
+GrabRadios.Size = UDim2.new(0, 25, 0, 25)
+GrabRadios.Font = Enum.Font.GothamBold
+GrabRadios.Text = ""
+GrabRadios.TextColor3 = Color3.fromRGB(135, 90, 0)
+GrabRadios.TextSize = 25.000
+GrabRadios.TextWrapped = true
+GrabRadios.MouseButton1Click:Connect(function()
+if grabradios == false then
+		grabradios = true
+		GrabRadios.BackgroundColor3 = Color3.fromRGB(255, 170, 0)
+	else
+		grabradios = false
+		GrabRadios.BackgroundColor3 = Color3.fromRGB(34,34,34)
+	end
+end)
+
+Drop.Name = "Drop"
+Drop.Parent = ExtrasFrame
+Drop.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Drop.BorderSizePixel = 0
+Drop.Position = UDim2.new(0.0491162539, 0, 0.221489385, 0)
+Drop.Size = UDim2.new(0, 25, 0, 25)
+Drop.Font = Enum.Font.GothamBold
+Drop.Text = ""
+Drop.TextColor3 = Color3.fromRGB(135, 90, 0)
+Drop.TextSize = 25.000
+Drop.TextWrapped = true
+Drop.MouseButton1Click:Connect(function()
+if drop == false then
+		drop = true
+		if drop then
+		for i,v in pairs(_player.b():GetChildren()) do
+			    if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+			        v.Parent = _player.c()
+			    end
+		    end
+		end
+		for i,v in pairs(workspace[_player.p.Name]:GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+			  v.Parent = workspace
+		   end
+		end
+		Drop.BackgroundColor3 = Color3.fromRGB(255, 170, 0)
+	else
+		drop = false
+		Drop.BackgroundColor3 = Color3.fromRGB(34,34,34)
+    end
+end)
+
+Info_6.Name = "Info"
+Info_6.Parent = ExtrasFrame
+Info_6.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Info_6.BackgroundTransparency = 1.000
+Info_6.BorderSizePixel = 0
+Info_6.Position = UDim2.new(0.189546749, 0, 0.195744678, 0)
+Info_6.Size = UDim2.new(0, 57, 0, 37)
+Info_6.Font = Enum.Font.GothamBold
+Info_6.Text = "Drop Radios"
+Info_6.TextColor3 = Color3.fromRGB(255, 170, 0)
+Info_6.TextSize = 14.000
+
+AlertFrame.Name = "AlertFrame"
+AlertFrame.Parent = TopTab
+AlertFrame.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+AlertFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+AlertFrame.Position = UDim2.new(0.350701421, 0, 1.90000093, 0)
+AlertFrame.Size = UDim2.new(0, 357, 0, 185)
+AlertFrame.Visible = false
+
+TextLabel.Parent = AlertFrame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.110529028, 0, 0.0657653809, 0)
+TextLabel.Size = UDim2.new(0, 278, 0, 104)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "enabling anti-mute is very buggy at the moment, as it continuously plays the same audio over and over again, if you do use this, enable and disable it every time you change your audio. (I will be fixing this soon)"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextButton.Parent = AlertFrame
+TextButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.224089652, 0, 0.670270443, 0)
+TextButton.Size = UDim2.new(0, 15, 0, 15)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = ""
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 14.000
+TextButton.MouseButton1Click:Connect(function()
+if TextButton.Text == "" then
+		TextButton.Text = "✓"
+	else
+		TextButton.Text = ""
+	end
+end)
+
+TextLabel_2.Parent = AlertFrame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.Position = UDim2.new(0.264590651, 0, 0.681405246, 0)
+TextLabel_2.Size = UDim2.new(0, 173, 0, 9)
+TextLabel_2.Font = Enum.Font.SourceSansBold
+TextLabel_2.Text = "dont show after i click confirm"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+
+TextButton_2.Parent = AlertFrame
+TextButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_2.BorderSizePixel = 0
+TextButton_2.Position = UDim2.new(0.319327742, 0, 0.837837994, 0)
+TextButton_2.Size = UDim2.new(0, 121, 0, 18)
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.Text = "confirm"
+TextButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_2.TextSize = 14.000
+TextButton_2.MouseButton1Click:Connect(function()
+	if TextButton.Text == "✓" then
+		dontshow = true
+	elseif TextButton.Text == "" then
+		dontshow = false
+		AlertFrame.Visible = false
+	end
+end)
+
 if game.SoundService.RespectFilteringEnabled == true then
 	RFECheck.Text = "RespectFilteringEnabled: true"
 elseif game.SoundService.RespectFilteringEnabled == false then
@@ -923,15 +1163,20 @@ rs.Stepped:Connect(function() --servermute
 		end
 	end
 end)
+	
+rs.Stepped:Connect(function()
+	if dontshow then
+		AlertFrame:Destroy()
+	end	
+end)
 
-antimute = true
 rs.Stepped:Connect(function()--antimute
 	if antimute then
 		if game.PlaceId == 177052655 then
 			for i,unmute in pairs(game.Workspace.Ignore.Players[_player.p.Name].Torso:GetDescendants()) do
 				if unmute:IsA'Sound' then
-				    while wait() do
-					unmute.Playing = true
+					while wait() do
+						unmute.Playing = true
 					end
 				end
 			end
@@ -940,41 +1185,8 @@ rs.Stepped:Connect(function()--antimute
 		for i,v in pairs(game.Workspace[_player.p.Name]:GetDescendants()) do
 			if v:IsA'Sound' then
 				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-					v.Playing = true
-				end
-			end
-		end
-	end
-		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
-			if v:IsA'Sound' then
-				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
-				v.Playing = true
-			end
-		end
-	end
-end)
-
-rs.Stepped:Connect(function()--player mute)
-	if playermute then
-		local player = GetPlayer(InputNameBox.Text) --add the text box here
-		if player then
-			for i,v in pairs(player:GetDescendants()) do
-				if v:IsA'Sound' and v.Name ~= _player.p.Name then
-					local c = player.Character
-					for i,audio in next, c:GetDescendants() do
-						if audio:IsA("Sound") then
-							audio.Playing = false
-						end
-					end
-				end
-			end
-			for i,v in pairs(player.Backpack:GetDescendants()) do
-				if v:IsA'Sound' and v.Name ~= _player.p.Name then
-					local c = player.Character
-					for i,audio in next, c:GetDescendants() do
-						if audio:IsA("Sound") then
-							audio.Playing = false
-						end
+					while wait() do
+						v.Playing = true
 					end
 				end
 			end
@@ -982,30 +1194,38 @@ rs.Stepped:Connect(function()--player mute)
 	end
 end)
 
-dupe = false
+rs.Stepped:Connect(function()
+    if grabradios then
+        for i,v in pairs(workspace:GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+			    v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+			end
+		end
+    end
+end)
+
 rs = game:GetService("RunService") --dupe system thats really bad
 rs.Stepped:Connect(function()
-if dupe then
-pcall(function()
-for i,v in pairs(_player.b():GetDescendants()) do --checks for tools in backpack
-    if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
-        v.Parent = _player.c()
-        v.Handle.CFrame = CFrame.new(_player.p.Name()["HumanoidRootPart"].CFrame)
-    end
-end
-
-for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
-    if(tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "SuperFlyGoldBoombox" or tool.Name == "Radio") then
-        tool.Parent = workspace -- drops the radios into workspace
-        repeat
-            wait()
-            _player.c():BreakJoints()
-            if _player.c() then
-                _player.c()["HumanoidRootPart"].CFrame = v.Handle.CFrame
-            end
-        until v.Parent == _player.c()
-    end
-end
-end)
-end
+	if dupe then
+		pcall(function()
+			for i,v in pairs(_player.b():GetDescendants()) do --checks for tools in backpack
+				if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+					v.Parent = _player.c()
+					v.Handle.CFrame = CFrame.new(_player.p.Name()["HumanoidRootPart"].CFrame)
+				end
+			end
+			for i,tool in pairs(workspace[_player.p.Name]:GetDescendants()) do
+				if(tool:IsA'Tool' and tool.Name == "Boombox" or tool.Name == "BoomBox" or tool.Name == "SuperFlyGoldBoombox" or tool.Name == "Radio") then
+					tool.Parent = workspace -- drops the radios into workspace
+					repeat
+						wait()
+						_player.c():BreakJoints()
+						if _player.c() then
+							_player.c()["HumanoidRootPart"].CFrame = v.Handle.CFrame
+						end
+					until v.Parent == _player.c()
+				end
+			end
+		end)
+	end
 end)
