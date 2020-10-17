@@ -1199,7 +1199,6 @@ rs.Stepped:Connect(function()
     end
 end)
 
-rs = game:GetService("RunService") --dupe system thats really bad
 rs.Stepped:Connect(function()
 	if dupe then
 		pcall(function()
@@ -1239,11 +1238,15 @@ rs.Stepped:Connect(function() --player mute
                     end
                 end
             end
-            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
-                if v:IsA'Sound'then
-                    v.Playing = false
-                end
-            end
+		    for i,v in pairs(player.Backpack:GetDescendants()) do
+			if v.Name ~= _player.n() then
+				for i,audio in next, v.Backpack:GetDescendants() do
+					if audio:IsA("Sound") then
+						audio.Playing = false
+					 end
+				  end
+			  end
+		   end
         end
     end
 end)
