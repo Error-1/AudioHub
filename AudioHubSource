@@ -1151,18 +1151,15 @@ rs.Stepped:Connect(function() --servermute
 				end
 			end
 		end
-		pcall(function()
-		for i,v in pairs(_player.all().Backpack:GetDescendants()) do
-			if v:IsA'Sound' and v.Name ~= _player.p.Name then
-				local c = player.Character
-				for i,audio in next, c:GetDescendants() do
+		for i,v in pairs(_player.all()) do
+			if v.Name ~= _player.n() then
+				for i,audio in next, v.Backpack:GetDescendants() do
 					if audio:IsA("Sound") then
 						audio.Playing = false
 					end
 				end
 			end
 		end
-		end)
 	end
 end)
 	
@@ -1172,7 +1169,6 @@ rs.Stepped:Connect(function()
 	end	
 end)
 
-antimute = not antimute
 rs.Stepped:Connect(function()--antimute
 	if antimute then
 		if game.PlaceId == 177052655 then
@@ -1227,4 +1223,27 @@ rs.Stepped:Connect(function()
 			end
 		end)
 	end
+end)
+
+rs.Stepped:Connect(function() --player mute
+	if playermute then
+		local player = GetPlayer(InputNameBox.Text) --add the text box here
+		if player then
+            for i,v in pairs(player:GetDescendants()) do
+                if v:IsA'Sound' and v.Name ~= _player.p.Name then
+                    local c = player.Character
+                    for i,audio in next, c:GetDescendants() do
+                        if audio:IsA("Sound") then
+                            audio.Playing = false
+                        end
+                    end
+                end
+            end
+            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
+                if v:IsA'Sound'then
+                    v.Playing = false
+                end
+            end
+        end
+    end
 end)
