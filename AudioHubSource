@@ -279,7 +279,29 @@ Play.MouseButton1Click:Connect(function()
 	regularplay = true
 	backpackplay = false
 	if BPlay.Text == "" then
-		play()
+	if game.PlaceId == 455366377 or game.PlaceId == 4669040 then
+		for i,v in pairs(_player.b():GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+				v.Parent = _player.c()
+				local tool = _player.c():FindFirstChildOfClass("Tool")
+				if tool then
+					tool:FindFirstChildOfClass("RemoteEvent"):FireServer("play",mask((AudioInput1.Text)))
+				end
+				return
+			end
+		end
+	elseif game.PlaceId == 177052655 then
+		game.ReplicatedStorage.Event:FireServer("PlayRadio", game.Players[_player.p.Name], tohex((AudioInput1.Text)))
+	elseif game.PlaceId ~= 177052655 or game.PlaceId ~= 455366377 or game.PlaceId ~= 4669040 then
+		for i,v in pairs(_player.b():GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+				v.Parent = _player.c()
+				v.Remote:FireServer("PlaySong",mask(AudioInput1.Text))
+				v.Handle.Sound.TimePosition = TimeSet1.Text
+				return
+			end
+		end
+	end
 	elseif BPlay.Text == "✓" then
 		backpackplay = true
 		regularplay = false
