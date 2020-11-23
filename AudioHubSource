@@ -1,1 +1,1003 @@
-warn'discontinued as of 10/23/2020'
+local sg = Instance.new("ScreenGui");local topframe = Instance.new("Frame");local containerframe = Instance.new("Frame");local settingsframe = Instance.new("Frame");local PlayMenu = Instance.new("TextButton");local UtilitiesMenu = Instance.new("TextButton");local LogMenu = Instance.new("TextButton");local framecontainer = Instance.new("Frame");local PlayFrame = Instance.new("Frame");local Play = Instance.new("TextButton");local AudioInput1 = Instance.new("TextBox");local Pause1 = Instance.new("TextButton");local UnPause1 = Instance.new("TextButton");local MessageBox1 = Instance.new("TextBox");local TimeSet1 = Instance.new("TextBox");local BPlay = Instance.new("TextButton");local check1 = Instance.new("TextLabel");local Sync1 = Instance.new("TextButton");local check2 = Instance.new("TextLabel");local LogFrame = Instance.new("Frame");local Victim1 = Instance.new("TextBox");local hexconverter = Instance.new("TextBox");local scrollingframe = Instance.new("ScrollingFrame");local output = Instance.new("TextBox");local TextButton = Instance.new("TextButton");local UtilitiesFrame = Instance.new("Frame");local Dupe = Instance.new("TextButton");local Grab = Instance.new("TextButton");local latency1 = Instance.new("TextBox");local ms = Instance.new("TextLabel");local Drop = Instance.new("TextButton");local latency2 = Instance.new("TextBox");local ms_2 = Instance.new("TextLabel");local NoGrip = Instance.new("TextButton");local UnDupe = Instance.new("TextButton");local MuteServer = Instance.new("TextButton");local Mute = Instance.new("TextButton");local UnMuteServer = Instance.new("TextButton");local Victim2 = Instance.new("TextBox");local UnMute = Instance.new("TextButton");local Brand = Instance.new("TextLabel");local Close = Instance.new("TextButton");local RFECheck = Instance.new("TextLabel")
+
+_player = {p = game:GetService("Players").LocalPlayer;b = function()return _player.p:FindFirstChild("Backpack")end;c = function()return _player.p.Character;end;m = function()return _player.p:GetMouse()end;n = function()return tostring(_player.p.Name)end;all = function()return game.Players:GetPlayers()end;}
+
+rs = game:GetService("RunService").Stepped
+
+function GetPlayer(targetedPlayerName)
+	for _,player in pairs(game:GetService("Players"):GetPlayers()) do
+		if targetedPlayerName:lower() == player.Name:sub(1,targetedPlayerName:len()):lower() then
+			return player
+		end
+	end
+	return nil
+end
+
+
+local function RandomString(t)
+	return t[math.random(1, #t)]
+end
+
+local god = "‮"
+local god2 = "‎"
+
+local function tohex(num)
+	return "0x" .. god .. string.format("%x"..god2,tostring(num))
+end
+
+local function unhide(num)
+	return "".. string.format("%x",tostring(num))
+end
+
+local function g(str)
+	str = tostring(str)
+	str = str:gsub(".",function(sym)
+		return string.format("%%%x",string.byte(sym))
+	end)
+	return str
+end
+
+local function bd(id)
+	local content = game:HttpGet("http://www.roblox.com/studio/plugins/info?assetId="..id)
+	if string.find(content, 'value="') then 
+		local epic = string.find(content, 'value="')
+		local almost = string.sub(content, epic + 7, epic + 18)
+		local filter1 = string.gsub(almost, " ", "")
+		local filter2 = string.gsub(filter1, "/", "")
+		local filter3 = string.gsub(filter2, ">", "")
+		local filter4 = string.gsub(filter3, '"', "")
+		local versionid = string.gsub(filter4, "<", "")
+		return versionid
+	end
+end
+
+function random_hash(len)
+	if( len == nil or len <= 0 ) then len = 32; end;
+	local holder = ""; -- a string for holding our hash temporarily
+
+
+	hash_chars = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e",
+		"f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+		"u", "v", "w", "x", "y", "z"};
+
+	for i = 1, len do
+		local index = math.random(1, #hash_chars);
+		holder = holder .. hash_chars[index];
+	end
+
+	return holder;
+end
+
+local hash = random_hash(id)
+
+function mask(id)
+	local x = g(id)
+	local x = bd(id)
+	local v = ""
+	local b = ""
+	local bait = "AsSeTvErSiOnId"
+	local dzx = MessageBox1.Text
+	v = v .. "&\n" .. dzx
+	local b = v ..  "\n"  ..  "&" .. g(bait) .. "=" .. g(tohex(tostring(x))) .. "\n &encryption-hash={" .. hash .. "}"
+	for i=1,1 do
+		b = b .. ""
+	end
+	for i=1,1 do
+		b = b .. ""
+	end
+	return b
+end
+
+function bplay()
+	regularplay = false
+	backpackplay = true
+	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+		if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+			v.Parent = game.Players.LocalPlayer.Character
+		end
+	end
+
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
+		if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+			v:FindFirstChildOfClass'RemoteEvent':FireServer("PlaySong",mask(AudioInput1.Text))
+		end
+	end
+
+	wait(0.6)
+
+	game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
+
+	wait(0.6)
+
+	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+		if v:IsA'Tool' and v.Name == "BoomBox" or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+			v.Handle.Sound.TimePosition = TimeSet1.Text
+			v.Handle.Sound.Playing = on
+		end
+	end
+end
+
+function play()
+	regularplay = true
+	backpackplay = false
+	if game.PlaceId == 455366377 or game.PlaceId == 4669040 then
+		for i,v in pairs(_player.b():GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+				v.Parent = _player.c()
+				local tool = _player.c():FindFirstChildOfClass("Tool")
+				if tool then
+					tool:FindFirstChildOfClass("RemoteEvent"):FireServer("play",mask((AudioInput1.Text.Text)))
+				end
+				return
+			end
+		end
+	elseif game.PlaceId == 177052655 then
+		game.ReplicatedStorage.Event:FireServer("PlayRadio", game.Players[_player.p.Name], tohex((AudioInput1.Text.Text)))
+	elseif game.PlaceId ~= 177052655 or game.PlaceId ~= 455366377 or game.PlaceId ~= 4669040 then
+		for i,v in pairs(_player.b():GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+				v.Parent = _player.c()
+				v.Remote:FireServer("PlaySong",mask(AudioInput1.Text))
+				v.Handle.Sound.TimePosition = TimeSet1.Text
+				return
+			end
+		end
+	end
+end
+
+function sysnc()
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+	if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+		v.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
+	if v:IsA'Tool' and v.Name == "BoomBox"  or v.Name == "Boombox" or v.Name == "SuperFlyGoldBoombox" then
+		v:FindFirstChildOfClass'RemoteEvent':FireServer("PlaySong",mask(AudioInput1.Text))
+		v.Handle.TimePosition = 0
+	end
+end
+end
+
+--loops
+on = true
+off = false
+servermute = false
+playermute = false
+dupe = false
+drop = false
+grabradios = false
+backpackplay = false
+sync = false
+regularplay = false
+
+sg.Name = "sg"
+sg.Parent = game.CoreGui
+sg.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+sg.ResetOnSpawn = true
+
+topframe.Name = "topframe"
+topframe.Parent = sg
+topframe.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+topframe.BorderColor3 = Color3.fromRGB(255, 255, 255)
+topframe.BorderSizePixel = 0
+topframe.Position = UDim2.new(0.256120533, 0, 0.368121445, 0)
+topframe.Size = UDim2.new(0, 484, 0, 19)
+topframe.Active = true
+topframe.Draggable = true
+
+containerframe.Name = "containerframe"
+containerframe.Parent = topframe
+containerframe.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+containerframe.BorderColor3 = Color3.fromRGB(255, 255, 255)
+containerframe.BorderSizePixel = 0
+containerframe.Position = UDim2.new(-7.78072135e-05, 0, 0.999700427, 0)
+containerframe.Size = UDim2.new(0, 484, 0, 272)
+
+settingsframe.Name = "settingsframe"
+settingsframe.Parent = containerframe
+settingsframe.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+settingsframe.BorderSizePixel = 0
+settingsframe.Position = UDim2.new(7.78072135e-05, 0, 0, 0)
+settingsframe.Size = UDim2.new(0, 483, 0, 26)
+
+PlayMenu.Name = "PlayMenu"
+PlayMenu.Parent = settingsframe
+PlayMenu.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+PlayMenu.BorderSizePixel = 0
+PlayMenu.Position = UDim2.new(0.144927531, 0, 0, 0)
+PlayMenu.Size = UDim2.new(0, 103, 0, 26)
+PlayMenu.Font = Enum.Font.PermanentMarker
+PlayMenu.Text = "Play"
+PlayMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayMenu.TextSize = 30.000
+PlayMenu.MouseButton1Click:Connect(function()
+	UtilitiesFrame.Visible = off
+	LogFrame.Visible = off
+	PlayFrame.Visible = on
+end)
+
+UtilitiesMenu.Name = "UtilitiesMenu"
+UtilitiesMenu.Parent = settingsframe
+UtilitiesMenu.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+UtilitiesMenu.BorderSizePixel = 0
+UtilitiesMenu.Position = UDim2.new(0.393374711, 0, 0, 0)
+UtilitiesMenu.Size = UDim2.new(0, 103, 0, 26)
+UtilitiesMenu.Font = Enum.Font.PermanentMarker
+UtilitiesMenu.Text = "Utilities"
+UtilitiesMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
+UtilitiesMenu.TextSize = 30.000
+UtilitiesMenu.MouseButton1Click:Connect(function()
+	UtilitiesFrame.Visible = on
+	LogFrame.Visible = off
+	PlayFrame.Visible = off
+end)
+
+LogMenu.Name = "LogMenu"
+LogMenu.Parent = settingsframe
+LogMenu.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+LogMenu.BorderSizePixel = 0
+LogMenu.Position = UDim2.new(0.641821861, 0, 0, 0)
+LogMenu.Size = UDim2.new(0, 103, 0, 26)
+LogMenu.Font = Enum.Font.PermanentMarker
+LogMenu.Text = "Log"
+LogMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
+LogMenu.TextSize = 30.000
+LogMenu.MouseButton1Click:Connect(function()
+	UtilitiesFrame.Visible = off
+	LogFrame.Visible = on
+	PlayFrame.Visible = off
+end)
+
+framecontainer.Name = "framecontainer"
+framecontainer.Parent = containerframe
+framecontainer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+framecontainer.BackgroundTransparency = 1.000
+framecontainer.BorderSizePixel = 0
+framecontainer.Position = UDim2.new(0.0227272734, 0, 0.095588237, 0)
+framecontainer.Size = UDim2.new(0, 460, 0, 234)
+
+PlayFrame.Name = "PlayFrame"
+PlayFrame.Parent = framecontainer
+PlayFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+PlayFrame.BorderSizePixel = 0
+PlayFrame.Position = UDim2.new(0.000988142565, 0, -0.00270236284, 0)
+PlayFrame.Size = UDim2.new(0, 460, 0, 234)
+
+Play.Name = "Play"
+Play.Parent = PlayFrame
+Play.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Play.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Play.BorderSizePixel = 0
+Play.Position = UDim2.new(0.386050165, 0, 0.547008514, 0)
+Play.Size = UDim2.new(0, 103, 0, 28)
+Play.Font = Enum.Font.PermanentMarker
+Play.Text = "Play"
+Play.TextColor3 = Color3.fromRGB(255, 255, 255)
+Play.TextSize = 25.000
+Play.MouseButton1Click:Connect(function()
+	regularplay = true
+	backpackplay = false
+	if BPlay.Text == "" then
+		play()
+	elseif BPlay.Text == "✓" then
+		backpackplay = true
+		regularplay = false
+		bplay()
+	end
+end)
+
+AudioInput1.Name = "AudioInput1"
+AudioInput1.Parent = PlayFrame
+AudioInput1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+AudioInput1.BorderSizePixel = 0
+AudioInput1.Position = UDim2.new(0.282608688, 0, 0.141025633, 0)
+AudioInput1.Size = UDim2.new(0, 200, 0, 50)
+AudioInput1.Font = Enum.Font.Jura
+AudioInput1.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+AudioInput1.PlaceholderText = "0123456789"
+AudioInput1.Text = ""
+AudioInput1.TextColor3 = Color3.fromRGB(255, 255, 255)
+AudioInput1.TextSize = 25.000
+AudioInput1.TextWrapped = true
+AudioInput1.TextScaled = true
+
+Pause1.Name = "Pause1"
+Pause1.Parent = PlayFrame
+Pause1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Pause1.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Pause1.BorderSizePixel = 0
+Pause1.Position = UDim2.new(0.386050195, 0, 0.696581185, 0)
+Pause1.Size = UDim2.new(0, 103, 0, 28)
+Pause1.Font = Enum.Font.PermanentMarker
+Pause1.Text = "Pause"
+Pause1.TextColor3 = Color3.fromRGB(255, 255, 255)
+Pause1.TextSize = 25.000
+Pause1.MouseButton1Click:Connect(function()
+	for i,v in pairs(workspace[_player.p.Name]:GetDescendants()) do
+		if v:IsA'Sound' then
+			v.Playing = off
+		end
+	end
+	for i,v in pairs(_player.b():GetDescendants()) do
+	    if(v:IsA'Sound') then
+	        v.Playing = off
+	    end
+	end
+	Pause1.Visible = off
+	UnPause1.Visible = on
+end)
+
+UnPause1.Name = "UnPause1"
+UnPause1.Parent = PlayFrame
+UnPause1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+UnPause1.BorderColor3 = Color3.fromRGB(27, 42, 53)
+UnPause1.BorderSizePixel = 0
+UnPause1.Position = UDim2.new(0.386050195, 0, 0.696581185, 0)
+UnPause1.Size = UDim2.new(0, 103, 0, 28)
+UnPause1.Visible = false
+UnPause1.Font = Enum.Font.PermanentMarker
+UnPause1.Text = "UnPause"
+UnPause1.TextColor3 = Color3.fromRGB(255, 255, 255)
+UnPause1.TextSize = 25.000
+UnPause1.MouseButton1Click:Connect(function()
+	for i,v in pairs(workspace[_player.p.Name]:GetDescendants()) do
+		if v:IsA'Sound' then
+			v.Playing = on
+		end
+	end
+	for i,v in pairs(_player.b():GetDescendants()) do
+	    if(v:IsA'Sound') then
+	        v.Playing = on
+	    end
+	end
+	Pause1.Visible = on
+	UnPause1.Visible = off
+end)
+
+MessageBox1.Name = "MessageBox1"
+MessageBox1.Parent = PlayFrame
+MessageBox1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+MessageBox1.BorderSizePixel = 0
+MessageBox1.Position = UDim2.new(0.282608688, 0, 0.3931624, 0)
+MessageBox1.Size = UDim2.new(0, 200, 0, 21)
+MessageBox1.Font = Enum.Font.Nunito
+MessageBox1.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+MessageBox1.PlaceholderText = "Message Here"
+MessageBox1.Text = ""
+MessageBox1.TextColor3 = Color3.fromRGB(255, 255, 255)
+MessageBox1.TextSize = 25.000
+MessageBox1.TextWrapped = true
+MessageBox1.TextScaled = true
+
+TimeSet1.Name = "TimeSet1"
+TimeSet1.Parent = PlayFrame
+TimeSet1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+TimeSet1.BorderSizePixel = 0
+TimeSet1.Position = UDim2.new(0.639130414, 0, 0.547008574, 0)
+TimeSet1.Size = UDim2.new(0, 36, 0, 28)
+TimeSet1.Font = Enum.Font.Jura
+TimeSet1.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+TimeSet1.PlaceholderText = "0"
+TimeSet1.Text = ""
+TimeSet1.TextColor3 = Color3.fromRGB(255, 255, 255)
+TimeSet1.TextScaled = true
+TimeSet1.TextSize = 25.000
+TimeSet1.TextWrapped = true
+TimeSet1.FocusLost:Connect(function(enter_pressed)
+	if enter_pressed then
+		local c = _player.c()
+		if c then
+			for i,v in pairs(c:GetDescendants()) do
+				if v:IsA'Sound' then
+					v.TimePosition = TimeSet1.Text
+				end
+			end
+			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do --bplay timeposition for yourself.
+				if v:IsA'Sound'then
+					v.TimePosition = TimeSet1.Text
+				end
+			end
+		end
+	end
+end)
+
+BPlay.Name = "BPlay"
+BPlay.Parent = PlayFrame
+BPlay.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+BPlay.BorderColor3 = Color3.fromRGB(27, 42, 53)
+BPlay.BorderSizePixel = 0
+BPlay.Position = UDim2.new(0.638224065, 0, 0.696581185, 0)
+BPlay.Size = UDim2.new(0, 36, 0, 28)
+BPlay.Font = Enum.Font.PermanentMarker
+BPlay.Text = ""
+BPlay.TextColor3 = Color3.fromRGB(255, 255, 255)
+BPlay.TextSize = 25.000
+BPlay.MouseButton1Click:Connect(function()
+if BPlay.Text == "" then
+		backpackplay = true
+		BPlay.Text = "✓"
+	else
+		BPlay.Text = ""
+		backpackplay = false
+	end
+end)
+
+check1.Name = "check1"
+check1.Parent = PlayFrame
+check1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+check1.BackgroundTransparency = 1.000
+check1.Position = UDim2.new(0.732879639, 0, 0.696581066, 0)
+check1.Size = UDim2.new(0, 75, 0, 28)
+check1.Font = Enum.Font.PermanentMarker
+check1.Text = "< BPlay"
+check1.TextColor3 = Color3.fromRGB(255, 255, 255)
+check1.TextSize = 25.000
+
+Sync1.Name = "Sync1"
+Sync1.Parent = PlayFrame
+Sync1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Sync1.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Sync1.BorderSizePixel = 0
+Sync1.Position = UDim2.new(0.638224065, 0, 0.841880322, 0)
+Sync1.Size = UDim2.new(0, 36, 0, 28)
+Sync1.Font = Enum.Font.PermanentMarker
+Sync1.Text = ""
+Sync1.TextColor3 = Color3.fromRGB(255, 255, 255)
+Sync1.TextSize = 25.000
+Sync1.MouseButton1Click:Connect(function()
+	if Sync1.Text == "" then
+	Sync1.Text = "✓"
+	sync = true
+	wait(.5)
+	Sync1.Text = ""
+	local c = _player.c()
+	if c then
+	for i,v in pairs(c:GetDescendants()) do
+			if v:IsA'Sound' then
+				v.TimePosition = TimeSet1.Text
+			end
+		end
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do --bplay timeposition for yourself.
+			if v:IsA'Sound'then
+				v.TimePosition = 0
+			end
+		end
+	end
+	sysnc()
+	else
+		Sync1.Text = ""
+		sync = false
+	end
+end)
+
+check2.Name = "check2"
+check2.Parent = PlayFrame
+check2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+check2.BackgroundTransparency = 1.000
+check2.Position = UDim2.new(0.732879639, 0, 0.841880202, 0)
+check2.Size = UDim2.new(0, 75, 0, 28)
+check2.Font = Enum.Font.PermanentMarker
+check2.Text = "< Sync"
+check2.TextColor3 = Color3.fromRGB(255, 255, 255)
+check2.TextSize = 25.000
+
+LogFrame.Name = "LogFrame"
+LogFrame.Parent = framecontainer
+LogFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+LogFrame.BorderSizePixel = 0
+LogFrame.Position = UDim2.new(0.000988142565, 0, -0.00270236284, 0)
+LogFrame.Size = UDim2.new(0, 460, 0, 234)
+LogFrame.Visible = false
+
+Victim1.Name = "Victim1"
+Victim1.Parent = LogFrame
+Victim1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Victim1.BorderSizePixel = 0
+Victim1.Position = UDim2.new(0.365217388, 0, 0.141025648, 0)
+Victim1.Size = UDim2.new(0, 124, 0, 31)
+Victim1.Font = Enum.Font.Jura
+Victim1.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+Victim1.PlaceholderText = "Player Name"
+Victim1.Text = ""
+Victim1.TextColor3 = Color3.fromRGB(255, 255, 255)
+Victim1.TextScaled = true
+Victim1.TextSize = 20.000
+Victim1.TextWrapped = true
+Victim1.FocusLost:Connect(function(enter_pressed)
+	if enter_pressed then
+		local player = GetPlayer(Victim1.Text)
+		local c = player.Character
+		local b = player.Backpack
+		if player then
+			if c then
+				for i,v in pairs(c:GetDescendants()) do
+					if(v:IsA'Sound') then
+						if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+							setclipboard(tostring(v.SoundId))
+							output.Text = v.SoundId
+						end
+					end
+				end
+			end
+			for i,v in pairs(b:GetDescendants()) do
+				if(v:IsA'Sound') then
+					if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+						setclipboard(tostring(v.SoundId))
+						output.Text = v.SoundId
+					end
+				end
+			end
+		end
+	end
+end)
+
+hexconverter.Name = "hexconverter"
+hexconverter.Parent = LogFrame
+hexconverter.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+hexconverter.BorderSizePixel = 0
+hexconverter.Position = UDim2.new(0.678260863, 0, 0.299145311, 0)
+hexconverter.Size = UDim2.new(0, 124, 0, 31)
+hexconverter.Font = Enum.Font.Jura
+hexconverter.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+hexconverter.PlaceholderText = "Hex Here       (include 0x)"
+hexconverter.Text = ""
+hexconverter.TextColor3 = Color3.fromRGB(255, 255, 255)
+hexconverter.TextScaled = true
+hexconverter.TextSize = 20.000
+hexconverter.TextWrapped = true
+hexconverter.FocusLost:Connect(function(enter_pressed)
+	if enter_pressed then
+		output.Text = tonumber(hexconverter.Text)
+		setclipboard(output.Text)
+	end
+end)
+
+scrollingframe.Name = "scrollingframe"
+scrollingframe.Parent = LogFrame
+scrollingframe.Active = true
+scrollingframe.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+scrollingframe.BorderSizePixel = 0
+scrollingframe.Position = UDim2.new(0.154347837, 0, 0.482905984, 0)
+scrollingframe.Size = UDim2.new(0, 317, 0, 85)
+scrollingframe.ScrollBarThickness = 0
+
+output.Name = "output"
+output.Parent = scrollingframe
+output.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+output.BackgroundTransparency = 1.000
+output.Size = UDim2.new(0, 317, 0, 558)
+output.ClearTextOnFocus = false
+output.Font = Enum.Font.SourceSans
+output.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+output.Text = ""
+output.TextColor3 = Color3.fromRGB(255, 255, 255)
+output.TextSize = 20.000
+output.TextWrapped = true
+output.TextXAlignment = Enum.TextXAlignment.Left
+output.TextYAlignment = Enum.TextYAlignment.Top
+
+TextButton.Parent = LogFrame
+TextButton.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.363043487, 0, 0.299145311, 0)
+TextButton.Size = UDim2.new(0, 124, 0, 31)
+TextButton.Font = Enum.Font.Jura
+TextButton.Text = "Decode URL"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 20.000
+TextButton.MouseButton1Click:Connect(function()
+	local decodeURI
+	do
+		local char, gsub, tonumber = string.char, string.gsub, tonumber
+		local function _(hex) return char(tonumber(hex, 16)) end
+
+		function decodeURI(s)
+			s = gsub(s, '%%(%x%x)', _)
+			return s
+		end
+	end
+	local player = GetPlayer(Victim1.Text)
+	local c = player.Character
+	local b = player.Backpack
+	if player then
+		if c then
+			for i,v in pairs(c:GetDescendants()) do
+				if(v:IsA'Sound') then
+					if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+						output.Text = tostring(decodeURI(v.SoundId))
+						setclipboard(output.Text)
+					end
+				end
+			end
+		end
+		for i,v in pairs(b:GetDescendants()) do
+			if(v:IsA'Sound') then
+				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+					output.Text = tostring(decodeURI(v.SoundId))
+					setclipboard(output.Text)
+				end
+			end
+		end
+	end
+end)
+
+UtilitiesFrame.Name = "UtilitiesFrame"
+UtilitiesFrame.Parent = framecontainer
+UtilitiesFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+UtilitiesFrame.BorderSizePixel = 0
+UtilitiesFrame.Position = UDim2.new(0.000988142565, 0, -0.00270236284, 0)
+UtilitiesFrame.Size = UDim2.new(0, 460, 0, 234)
+UtilitiesFrame.Visible = false
+
+Dupe.Name = "Dupe"
+Dupe.Parent = UtilitiesFrame
+Dupe.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Dupe.BorderSizePixel = 0
+Dupe.Position = UDim2.new(0.173913047, 0, 0.235042736, 0)
+Dupe.Size = UDim2.new(0, 110, 0, 30)
+Dupe.Font = Enum.Font.Jura
+Dupe.Text = "Dupe"
+Dupe.TextColor3 = Color3.fromRGB(255, 255, 255)
+Dupe.TextSize = 25.000
+Dupe.MouseButton1Click:Connect(function()
+	dupe = not dupe
+	Dupe.Visible = off
+	UnDupe.Visible = on
+end)
+
+Grab.Name = "Grab"
+Grab.Parent = UtilitiesFrame
+Grab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Grab.BorderSizePixel = 0
+Grab.Position = UDim2.new(0.439130425, 0, 0.235042736, 0)
+Grab.Size = UDim2.new(0, 110, 0, 30)
+Grab.Font = Enum.Font.Jura
+Grab.Text = "Grab Radios"
+Grab.TextColor3 = Color3.fromRGB(255, 255, 255)
+Grab.TextScaled = true
+Grab.TextSize = 25.000
+Grab.TextWrapped = true
+Grab.MouseButton1Click:Connect(function()
+	if grabradios == off then
+		grabradios = on
+	else
+		grabradios = off
+	end
+end)
+
+latency1.Name = "latency1"
+latency1.Parent = UtilitiesFrame
+latency1.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+latency1.BorderSizePixel = 0
+latency1.Position = UDim2.new(0.695652187, 0, 0.235042736, 0)
+latency1.Size = UDim2.new(0, 24, 0, 30)
+latency1.Font = Enum.Font.SourceSans
+latency1.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+latency1.PlaceholderText = "0"
+latency1.Text = ""
+latency1.TextColor3 = Color3.fromRGB(255, 255, 255)
+latency1.TextSize = 20.000
+latency1.TextWrapped = true
+
+ms.Name = "ms;"
+ms.Parent = UtilitiesFrame
+ms.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ms.BackgroundTransparency = 1.000
+ms.Position = UDim2.new(0.765217423, 0, 0.247863248, 0)
+ms.Size = UDim2.new(0, 28, 0, 23)
+ms.Font = Enum.Font.SourceSans
+ms.Text = "(ms)"
+ms.TextColor3 = Color3.fromRGB(255, 255, 255)
+ms.TextSize = 20.000
+
+Drop.Name = "Drop"
+Drop.Parent = UtilitiesFrame
+Drop.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Drop.BorderSizePixel = 0
+Drop.Position = UDim2.new(0.439130425, 0, 0.3931624, 0)
+Drop.Size = UDim2.new(0, 110, 0, 30)
+Drop.Font = Enum.Font.Jura
+Drop.Text = "Drop Radios"
+Drop.TextColor3 = Color3.fromRGB(255, 255, 255)
+Drop.TextScaled = true
+Drop.TextSize = 25.000
+Drop.TextWrapped = true
+Drop.MouseButton1Click:Connect(function()
+	for i,v in pairs(_player.b():GetChildren()) do
+		if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+			wait(latency2.Text)
+			v.Parent = _player.c()
+		end
+	end
+	for i,v in pairs(workspace[_player.p.Name]:GetChildren()) do
+		if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+			v.Parent = workspace
+		end
+	end
+end)
+
+latency2.Name = "latency2"
+latency2.Parent = UtilitiesFrame
+latency2.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+latency2.BorderSizePixel = 0
+latency2.Position = UDim2.new(0.695652187, 0, 0.3931624, 0)
+latency2.Size = UDim2.new(0, 24, 0, 30)
+latency2.Font = Enum.Font.SourceSans
+latency2.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+latency2.PlaceholderText = "0"
+latency2.Text = ""
+latency2.TextColor3 = Color3.fromRGB(255, 255, 255)
+latency2.TextSize = 20.000
+latency2.TextWrapped = true
+
+ms_2.Name = "ms;"
+ms_2.Parent = UtilitiesFrame
+ms_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ms_2.BackgroundTransparency = 1.000
+ms_2.Position = UDim2.new(0.765217423, 0, 0.405982912, 0)
+ms_2.Size = UDim2.new(0, 28, 0, 23)
+ms_2.Font = Enum.Font.SourceSans
+ms_2.Text = "(ms)"
+ms_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+ms_2.TextSize = 20.000
+
+NoGrip.Name = "NoGrip"
+NoGrip.Parent = UtilitiesFrame
+NoGrip.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+NoGrip.BorderSizePixel = 0
+NoGrip.Position = UDim2.new(0.173913047, 0, 0.3931624, 0)
+NoGrip.Size = UDim2.new(0, 110, 0, 30)
+NoGrip.Font = Enum.Font.Jura
+NoGrip.Text = "No Grip"
+NoGrip.TextColor3 = Color3.fromRGB(255, 255, 255)
+NoGrip.TextSize = 25.000
+NoGrip.MouseButton1Click:Connect(function()
+	local Player = game:GetService("Players").LocalPlayer
+	local Character = Player.Character or Player.CharacterAdded:Wait(.1)
+
+	repeat wait(0.5)
+		Character:FindFirstChild("Animate"):FindFirstChild("toolnone"):FindFirstChild("ToolNoneAnim").AnimationId = "rbxassetid://"
+	until Character:FindFirstChild("Animate"):FindFirstChild("toolnone"):FindFirstChild("ToolNoneAnim").AnimationId == "rbxassetid://"
+end)
+
+UnDupe.Name = "UnDupe"
+UnDupe.Parent = UtilitiesFrame
+UnDupe.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+UnDupe.BorderSizePixel = 0
+UnDupe.Position = UDim2.new(0.173913047, 0, 0.235042736, 0)
+UnDupe.Size = UDim2.new(0, 110, 0, 30)
+UnDupe.Visible = false
+UnDupe.Font = Enum.Font.Jura
+UnDupe.Text = "UnDupe"
+UnDupe.TextColor3 = Color3.fromRGB(255, 255, 255)
+UnDupe.TextSize = 25.000
+UnDupe.MouseButton1Click:Connect(function()
+	dupe = off
+	Dupe.Visible = on
+	UnDupe.Visible = off
+	for i,v in pairs(workspace:GetChildren()) do
+		if (v:IsA"Tool" and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "BoomboxGearThree" or v.Name == "Radio") then
+			if v:FindFirstChild("Handle") then
+				repeat
+					wait()
+					if _player.c() then
+						v.Handle.CFrame = _player.c()["Torso"].CFrame
+					end
+				until v.Parent == _player.c()
+			end
+		end
+	end
+end)
+
+MuteServer.Name = "MuteServer"
+MuteServer.Parent = UtilitiesFrame
+MuteServer.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+MuteServer.BorderSizePixel = 0
+MuteServer.Position = UDim2.new(0.173913062, 0, 0.551282048, 0)
+MuteServer.Size = UDim2.new(0, 110, 0, 30)
+MuteServer.Font = Enum.Font.Jura
+MuteServer.Text = "Mute Server"
+MuteServer.TextColor3 = Color3.fromRGB(255, 255, 255)
+MuteServer.TextScaled = true
+MuteServer.TextSize = 25.000
+MuteServer.TextWrapped = true
+MuteServer.MouseButton1Click:Connect(function()
+	servermute = on
+	MuteServer.Visible = off
+	UnMuteServer.Visible = on
+end)
+
+Mute.Name = "Mute"
+Mute.Parent = UtilitiesFrame
+Mute.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Mute.BorderSizePixel = 0
+Mute.Position = UDim2.new(0.695652187, 0, 0.551282048, 0)
+Mute.Size = UDim2.new(0, 24, 0, 30)
+Mute.Font = Enum.Font.Jura
+Mute.Text = ""
+Mute.TextColor3 = Color3.fromRGB(255, 255, 255)
+Mute.TextScaled = true
+Mute.TextSize = 25.000
+Mute.TextWrapped = true
+Mute.MouseButton1Click:Connect(function()
+	playermute = on
+	Mute.Visible = off
+	UnMute.Visible = on
+end)
+
+UnMuteServer.Name = "UnMuteServer"
+UnMuteServer.Parent = UtilitiesFrame
+UnMuteServer.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+UnMuteServer.BorderSizePixel = 0
+UnMuteServer.Position = UDim2.new(0.267391324, 0, 0.581196606, 0)
+UnMuteServer.Size = UDim2.new(0, 110, 0, 30)
+UnMuteServer.Visible = false
+UnMuteServer.Font = Enum.Font.Jura
+UnMuteServer.Text = "UnMute Server"
+UnMuteServer.TextColor3 = Color3.fromRGB(255, 255, 255)
+UnMuteServer.TextScaled = true
+UnMuteServer.TextSize = 25.000
+UnMuteServer.TextWrapped = true
+UnMuteServer.MouseButton1Click:Connect(function()
+	servermute = off
+	MuteServer.Visible = on
+	UnMuteServer.Visible = off
+end)
+
+Victim2.Name = "Victim2"
+Victim2.Parent = UtilitiesFrame
+Victim2.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Victim2.BorderSizePixel = 0
+Victim2.Position = UDim2.new(0.439130366, 0, 0.551282048, 0)
+Victim2.Size = UDim2.new(0, 111, 0, 30)
+Victim2.Font = Enum.Font.Jura
+Victim2.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+Victim2.PlaceholderText = "Victim"
+Victim2.Text = ""
+Victim2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Victim2.TextSize = 20.000
+
+UnMute.Name = "UnMute"
+UnMute.Parent = UtilitiesFrame
+UnMute.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+UnMute.BorderSizePixel = 0
+UnMute.Position = UDim2.new(0.704347849, 0, 0.581196606, 0)
+UnMute.Size = UDim2.new(0, 24, 0, 30)
+UnMute.Visible = false
+UnMute.Font = Enum.Font.Jura
+UnMute.Text = "X"
+UnMute.TextColor3 = Color3.fromRGB(255, 255, 255)
+UnMute.TextScaled = true
+UnMute.TextSize = 25.000
+UnMute.TextWrapped = true
+UnMute.MouseButton1Click:Connect(function()
+	playermute = off
+	Mute.Visible = on
+	UnMute.Visible = off
+end)
+
+Brand.Name = "Brand"
+Brand.Parent = containerframe
+Brand.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Brand.BackgroundTransparency = 1.000
+Brand.Position = UDim2.new(0.0524448976, 0, 0.843459785, 0)
+Brand.Size = UDim2.new(0, 100, 0, 29)
+Brand.Font = Enum.Font.PermanentMarker
+Brand.Text = "AudioHub V2"
+Brand.TextColor3 = Color3.fromRGB(255, 255, 255)
+Brand.TextSize = 25.000
+
+Close.Name = "Close"
+Close.Parent = topframe
+Close.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Close.BackgroundTransparency = 1.000
+Close.BorderSizePixel = 0
+Close.Position = UDim2.new(0.000123500824, 0, -3.7252903e-08, 0)
+Close.Size = UDim2.new(0, 24, 0, 19)
+Close.Font = Enum.Font.PermanentMarker
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close.TextSize = 14.000
+Close.MouseButton1Click:Connect(function()
+	sg:Destroy()
+end)
+
+RFECheck.Name = "RFECheck"
+RFECheck.Parent = topframe
+RFECheck.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+RFECheck.BackgroundTransparency = 1.000
+RFECheck.Position = UDim2.new(0.144628093, 0, 0.052332025, 0)
+RFECheck.Size = UDim2.new(0, 342, 0, 18)
+RFECheck.Font = Enum.Font.Jura
+RFECheck.Text = "RFE"
+RFECheck.TextColor3 = Color3.fromRGB(255, 255, 255)
+RFECheck.TextSize = 25.000
+
+if game.SoundService.RespectFilteringEnabled == true then
+	RFECheck.Text = "RFE = true"
+else
+	RFECheck.Text = "RFE = false"
+end
+
+rs:Connect(function()
+	if grabradios then
+		for i,v in pairs(workspace:GetChildren()) do
+			if (v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox" or v.Name == "SuperFlyGoldBoombox" or v.Name == "Radio") then
+				wait(latency1.Text)
+				v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+			end
+		end
+	end
+end)
+
+rs:Connect(function()
+	if dupe then
+		for i,v in pairs(_player.b():GetChildren()) do
+			if(v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox") then
+				v.Parent = _player.c()
+			end
+		end
+		for i,v in pairs(_player.c():GetDescendants()) do
+			if(v:IsA'Tool' and v.Name == "Boombox" or v.Name == "BoomBox") then
+				v.Parent = workspace
+				repeat
+					wait()
+					_player.c():BreakJoints()
+					if _player.c() then
+						v.Handle.CFrame = _player.c()["HumanoidRootPart"].CFrame
+					end
+				until dupe == off
+			end
+		end
+	end
+end)
+
+rs:Connect(function() --servermute
+	if servermute then
+		for i,v in pairs(_player.all()) do
+			if v.Name ~= _player.n() then
+				for i,audio in next, v.Character:GetDescendants() do
+					if audio:IsA("Sound") then
+						audio.Playing = false
+					end
+				end
+			end
+		end
+		for i,v in pairs(_player.all()) do
+			if v.Name ~= _player.n() then
+				for i,audio in next, v.Backpack:GetDescendants() do
+					if audio:IsA("Sound") then
+						audio.Playing = false
+					end
+				end
+			end
+		end
+	end
+end)
+
+rs:Connect(function()
+	if playermute then
+		local player = GetPlayer(Victim2.Text)
+		local c = player.Character
+		local b = player.Backpack
+		if player then
+			if c then
+				for i,v in pairs(c:GetDescendants()) do
+					if(v:IsA'Sound') then
+						if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+							v.Playing = off
+						end
+					end
+				end
+			end
+		end
+		for i,v in pairs(b:GetDescendants()) do
+			if(v:IsA'Sound') then
+				if v.Name ~= "GettingUp" and v.Name ~= "Died" and v.Name ~= "FreeFalling" and v.Name ~= "Jumping" and v.Name ~= "Landing" and v.Name ~= "Splash" and v.Name ~= "Running" and v.Name ~= "Swimming" and v.Name ~= "Climbing" then
+					v.Playing = off
+				end
+			end
+		end
+	end
+end)
